@@ -2760,7 +2760,7 @@ function Footer() {
                         marginBottom: 4,
                     }}
                 >
-                    CAPULINES
+                    CASAS ANDARES
                 </div>
                 <div
                     style={{
