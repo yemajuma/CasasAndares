@@ -2768,7 +2768,7 @@ function Footer() {
                         fontSize: "clamp(10px, 3vw, 12px)",
                     }}
                 >
-                    Calle sin nomre S/N,Xometitla, Capulhuac · Estado de México · © 2026
+                    Calle sin nombre S/N,Xometitla, Capulhuac · Estado de México · © 2026
                 </div>
             </div>
             <div
