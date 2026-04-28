@@ -8,3 +8,99 @@ body {
   font-family: 'Montserrat', 'Segoe UI', sans-serif;
   overflow-x: hidden;
 }
+/* ============================================ */
+/* AJUSTES PARA CELULAR (menos de 768px)       */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  
+  /* 1. Banner de oferta especial dentro de Casas */
+  #casas .flex {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 16px !important;
+  }
+  
+  #casas .flex > div:first-child {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  
+  #casas .flex a {
+    margin-top: 8px !important;
+  }
+  
+
+  
+  /* 3. Tarjetas internas - mejor padding */
+  #casas .grid > div > div:last-child {
+    padding: 20px !important;
+  }
+  
+  /* 4. Precios más grandes en celular */
+  #casas .grid div div[style*="font-size: 28px"] {
+    font-size: 24px !important;
+  }
+  
+  /* 5. Planta Baja y Planta Alta - una columna */
+  #distribucion .grid,
+  .distribucion-grid {
+    grid-template-columns: 1fr !important;
+    gap: 30px !important;
+  }
+  
+  /* 6. Imágenes de plantas - más grandes */
+  #distribucion img,
+  .planta-img {
+    object-fit: contain !important;
+    max-height: 250px !important;
+  }
+  
+  /* 7. Títulos de secciones más pequeños */
+  h2 {
+    font-size: 28px !important;
+  }
+  
+  h3 {
+    font-size: 22px !important;
+  }
+  
+  /* 8. Espaciado general */
+  section {
+    padding: 40px 20px !important;
+  }
+}
+/* ============================================ */
+/* ARREGLOS ADICIONALES PARA CELULAR            */
+/* ============================================ */
+
+@media (max-width: 768px) {
+  
+  /* 9. Imágenes de plantas - más grandes en celular */
+  #distribucion div[style*="aspect-ratio"] {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  #distribucion img {
+    width: 100% !important;
+    min-height: 300px !important;
+    object-fit: contain !important;
+  }
+  
+  /* 10. Tarjetas de venta/renta - más espacio */
+  #casas > div > div:last-child {
+    margin: 0 16px !important;
+  }
+  
+  /* 11. Texto de amenidades en 2 columnas */
+  #amenidades > div > div:first-child {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+  
+  /* 12. Padding general reducido */
+  section {
+    padding: 30px 16px !important;
+  }
+}
