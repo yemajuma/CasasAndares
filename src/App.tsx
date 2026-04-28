@@ -2768,7 +2768,7 @@ function Footer() {
                         fontSize: "clamp(10px, 3vw, 12px)",
                     }}
                 >
-                    Calle sin nombre S/N,Xometitla, Capulhuac · Estado de México · © 2026
+                    Calle sin Nombre S/N, Xometitla, Capulhuac de Mirafuentes, Mexico, 52700 · © 2026
                 </div>
             </div>
             <div
