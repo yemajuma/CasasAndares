@@ -873,7 +873,7 @@ function BannerBono() {
                         flexShrink: 0,
                     }}
                 >
-                    <a
+                   {/* <a
                         href={WA_LINK_CITA}
                         target="_blank"
                         rel="noreferrer"
@@ -893,7 +893,7 @@ function BannerBono() {
                         }}
                     >
                         💬 Quiero mi bono
-                    </a>
+                    </a> */}
                     <button
                         onClick={() => setVisible(false)}
                         style={{
@@ -1085,7 +1085,7 @@ function Casas() {
                             WhatsApp para conocer todos los detalles.
                         </div>
                     </div>
-                    <a
+                    {/* <a
                         href={WA_LINK_GENERAL}
                         target="_blank"
                         rel="noreferrer"
@@ -1104,7 +1104,7 @@ function Casas() {
                         }}
                     >
                         💬 Quiero saber más
-                    </a>
+                    </a>*/}
                 </div>
 
                 {/* Tarjetas de VENTA y RENTA - UNA AL LADO DE LA OTRA */}
