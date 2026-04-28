@@ -1054,6 +1054,8 @@ function Casas() {
                         padding: "18px 24px",
                         marginBottom: 32,
                         display: "flex",
+                        flexDirection: "column",
+                        textAlign: "center",
                         alignItems: "center",
                         gap: 16,
                         flexWrap: "wrap",
@@ -1109,7 +1111,7 @@ function Casas() {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(2, 1fr)",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(1fr)",
                         gap: 24,
                         maxWidth: 900,
                         margin: "0 auto",
@@ -1309,7 +1311,7 @@ function DistribucionGaleria() {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(2, 1fr)",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                         gap: 48,
                         alignItems: "center",
                         marginBottom: 80,
@@ -1422,7 +1424,7 @@ function DistribucionGaleria() {
                 <div
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(2, 1fr)",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
                         gap: 48,
                         alignItems: "center",
                         marginBottom: 80,
@@ -1498,7 +1500,7 @@ function DistribucionGaleria() {
                         <div
                             style={{
                                 width: "100%",
-                                aspectRatio: "4/3",
+                                aspectRatio: "1/1",
                                 background: C.navyL,
                                 display: "flex",
                                 alignItems: "center",
@@ -2079,7 +2081,7 @@ function Croquis() {
                         <div
                             style={{
                                 width: "100%",
-                                aspectRatio: "4/3",
+                                aspectRatio: "1/1",
                                 background: C.navyL,
                                 display: "flex",
                                 alignItems: "center",
