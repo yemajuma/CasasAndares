@@ -724,7 +724,7 @@ function Hero() {
                         Ver casas disponibles
                     </BtnGold>
                     <BtnOutline href={WA_LINK_CITA} light>
-                         visita
+                        Agendar visita
                     </BtnOutline>
                 </div>
                 <div
@@ -1899,7 +1899,7 @@ function GaleriaEspacios() {
                             gap: 8,
                         }}
                     >
-                        🏠  visita
+                        🏠 Agendar visita
                     </BtnGold>
                     <p
                         style={{
