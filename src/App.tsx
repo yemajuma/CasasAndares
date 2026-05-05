@@ -724,7 +724,7 @@ function Hero() {
                         Ver casas disponibles
                     </BtnGold>
                     <BtnOutline href={WA_LINK_CITA} light>
-                        Agendar visita
+                         visita
                     </BtnOutline>
                 </div>
                 <div
@@ -1899,7 +1899,7 @@ function GaleriaEspacios() {
                             gap: 8,
                         }}
                     >
-                        🏠 Agendar visita
+                        🏠  visita
                     </BtnGold>
                     <p
                         style={{
@@ -2294,7 +2294,7 @@ function Ubicacion() {
                             ))}
                         </div>
                         <div style={{ marginTop: 20, textAlign: "center" }}>
-                            <BtnGold href={WA_MSG_GENERAL}>
+                            <BtnGold href={WA_LINK_CITA}>
                                 Agendar visita guiada
                             </BtnGold>
                         </div>
