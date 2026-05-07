@@ -65,7 +65,7 @@ const IMG = {
     recamara: "https://i.postimg.cc/prCyCw6W/RECAMARA-PRINCIPAL.jpg",
     jardin: "https://i.postimg.cc/wBNvZyGG/jardi-n.jpg",
     cancha: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
-    croquis: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
+    croquis: "https://i.postimg.cc/kGnqSns9/CD3529A8-7069-4F8B-ADFA-539A7BC98BE1-1-201-a.jpg",
     fachada: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
     comedor:
         "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
@@ -73,9 +73,9 @@ const IMG = {
         "https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
     cochera: "https://i.postimg.cc/y8sCsJxQ/COCHERA.jpg",
     // 👇 AGREGAR IMÁGENES DE TERRENOS 👇
-    terreno1: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",  // Cambia por tu imagen
-    terreno2: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
-    terreno3: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
+    terreno1: "https://i.postimg.cc/kgt3B6CL/OCOYOACAC-AEREA.png",  // Cambia por tu imagen
+    terreno2: "https://i.postimg.cc/RF4jsgHy/Capulhuac-AEREA.jpg",
+    terreno3: "https://i.postimg.cc/N07nHRz4/Xometitla-AEREA.jpg",
     terreno4: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
 }
 
