@@ -450,6 +450,7 @@ function Navbar() {
         { id: "amenidades", label: "Amenidades" },
         { id: "croquis", label: "Croquis" },
         { id: "ubicacion", label: "Ubicación" },
+        { id: "terrenos", label: "Terrenos" },
         { id: "aviso-privacidad", label: "Aviso de Privacidad" },
     ]
     return (
