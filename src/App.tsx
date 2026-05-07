@@ -19,6 +19,7 @@ const WA_MSG_CITA = encodeURIComponent(
 
 const WA_MSG_GENERAL = encodeURIComponent(
     "Hola, me interesa una casa en Casas Andares. ¿Me pueden dar más información?"
+)
 const WA_MSG_TERRENO = encodeURIComponent(
     "Hola, estoy interesado en COMPRAR UN TERRENO en Capulhuac. ¿Me pueden dar más información sobre precios y disponibilidad?"
 )
