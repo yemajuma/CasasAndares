@@ -72,10 +72,10 @@ const IMG = {
         "https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
     cochera: "https://i.postimg.cc/y8sCsJxQ/COCHERA.jpg",
     // 👇 AGREGAR IMÁGENES DE TERRENOS 👇
-    terreno1: "https://i.postimg.cc/tgXyZ0N0/terreno-vista.jpg",  // Cambia por tu imagen
-    terreno2: "https://i.postimg.cc/tgXyZ0N0/terreno-esquinero.jpg",
-    terreno3: "https://i.postimg.cc/tgXyZ0N0/terreno-residencial.jpg",
-    terreno4: "https://i.postimg.cc/tgXyZ0N0/terreno-golf.jpg",
+    terreno1: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",  // Cambia por tu imagen
+    terreno2: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
+    terreno3: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
+    terreno4: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
 }
 
 // ─── DATOS DEL PROYECTO ─────────────────────────────────────────────────────
