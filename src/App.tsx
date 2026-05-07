@@ -19,6 +19,8 @@ const WA_MSG_CITA = encodeURIComponent(
 
 const WA_MSG_GENERAL = encodeURIComponent(
     "Hola, me interesa una casa en Casas Andares. ¿Me pueden dar más información?"
+const WA_MSG_TERRENO = encodeURIComponent(
+    "Hola, estoy interesado en COMPRAR UN TERRENO en Capulhuac. ¿Me pueden dar más información sobre precios y disponibilidad?"
 )
 
 // Links según la intención
@@ -26,6 +28,7 @@ const WA_LINK_COMPRAR = `https://wa.me/${WA_NUM}?text=${WA_MSG_COMPRAR}`
 const WA_LINK_RENTAR = `https://wa.me/${WA_NUM}?text=${WA_MSG_RENTAR}`
 const WA_LINK_CITA = `https://wa.me/${WA_NUM}?text=${WA_MSG_CITA}`
 const WA_LINK_GENERAL = `https://wa.me/${WA_NUM}?text=${WA_MSG_GENERAL}`
+const WA_LINK_TERRENO = `https://wa.me/${WA_NUM}?text=${WA_MSG_TERRENO}`
 
 const TALLY_ID = "LZY062"
 
@@ -45,6 +48,10 @@ const C = {
     text: "#18283a",
     muted: "#607080",
     dark: "#050f1a",
+    terracota: "#c46b3f",
+    terracotaL: "#fdf5f0",
+    sunset: "#e8934f",
+    sunsetL: "#fef7e8",
 }
 
 // ─── IMÁGENES ────────────────────────────────────────────────────────────────
@@ -64,6 +71,11 @@ const IMG = {
     terraza:
         "https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
     cochera: "https://i.postimg.cc/y8sCsJxQ/COCHERA.jpg",
+    // 👇 AGREGAR IMÁGENES DE TERRENOS 👇
+    terreno1: "https://i.postimg.cc/tgXyZ0N0/terreno-vista.jpg",  // Cambia por tu imagen
+    terreno2: "https://i.postimg.cc/tgXyZ0N0/terreno-esquinero.jpg",
+    terreno3: "https://i.postimg.cc/tgXyZ0N0/terreno-residencial.jpg",
+    terreno4: "https://i.postimg.cc/tgXyZ0N0/terreno-golf.jpg",
 }
 
 // ─── DATOS DEL PROYECTO ─────────────────────────────────────────────────────
@@ -2304,7 +2316,354 @@ function Ubicacion() {
         </section>
     )
 }
+// ─── TERRENOS ────────────────────────────────────────────────────────────────
+const TERRENOS = [
+    {
+        id: 1,
+        nombre: "Terreno Vista al Valle",
+        metrosCuadrados: 220,
+        precioPorMetro: 4500,
+        precioTotal: 990000,
+        etiquetas: ["🎯 Precio a tratar", "🌄 Vista panorámica"],
+        destacado: true,
+        imagen: IMG.terreno1,  // 👈 Usando IMG en lugar de URL directa
+        descripcion: "Preciosa vista al valle de Toluca, terreno en zona de crecimiento.",
+    },
+    {
+        id: 2,
+        nombre: "Terreno Esquinero",
+        metrosCuadrados: 310,
+        precioPorMetro: 5200,
+        precioTotal: 1612000,
+        etiquetas: ["📍 Esquinero", "📐 Más grande"],
+        destacado: false,
+        imagen: IMG.terreno2,
+        descripcion: "Ubicación estratégica en esquina con alta visibilidad.",
+    },
+    {
+        id: 3,
+        nombre: "Terreno Residencial",
+        metrosCuadrados: 180,
+        precioPorMetro: 4800,
+        precioTotal: 864000,
+        etiquetas: ["🎯 Precio a tratar"],
+        destacado: false,
+        imagen: IMG.terreno3,
+        descripcion: "Ideal para construir tu hogar en zona tranquila.",
+    },
+    {
+        id: 4,
+        nombre: "Terreno Club de Golf",
+        metrosCuadrados: 450,
+        precioPorMetro: 3800,
+        precioTotal: 1710000,
+        etiquetas: ["⛳ Frente al club", "🌳 Área verde", "🎯 Precio negociable"],
+        destacado: true,
+        imagen: IMG.terreno4,
+        descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
+    },
+]
 
+function Terrenos() {
+    const [selectedImage, setSelectedImage] = useState(null)
+    
+    const formatNumber = (num) => {
+        return new Intl.NumberFormat('es-MX').format(num)
+    }
+
+    return (
+        <section
+            id="terrenos"
+            style={{
+                background: `linear-gradient(135deg, ${C.sunsetL} 0%, ${C.white} 100%)`,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+                borderTop: `1px solid ${C.border}`,
+                borderBottom: `1px solid ${C.border}`,
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    badge="TERRENOS DISPONIBLES"
+                    badgeBg={C.sunsetL}
+                    badgeColor={C.sunset}
+                    title="Invierte en tu terreno en Capulhuac"
+                    sub="Precios por metro cuadrado desde $3,800 MXN. Terrenos con gran plusvalía en la zona."
+                    center
+                />
+
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                        gap: 28,
+                        marginTop: 24,
+                    }}
+                >
+                    {TERRENOS.map((terreno) => (
+                        <div
+                            key={terreno.id}
+                            style={{
+                                background: C.white,
+                                borderRadius: 20,
+                                overflow: "hidden",
+                                transition: "all 0.3s ease",
+                                boxShadow: terreno.destacado 
+                                    ? `0 12px 30px rgba(232,147,79,.15), 0 0 0 2px ${C.sunset}` 
+                                    : "0 8px 20px rgba(0,0,0,0.06)",
+                                cursor: "pointer",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "translateY(-8px)"
+                                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.12)"
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "none"
+                                e.currentTarget.style.boxShadow = terreno.destacado 
+                                    ? `0 12px 30px rgba(232,147,79,.15), 0 0 0 2px ${C.sunset}` 
+                                    : "0 8px 20px rgba(0,0,0,0.06)"
+                            }}
+                            onClick={() => setSelectedImage(terreno)}
+                        >
+                            {/* Contenedor de imagen - SIGUIENDO EL MISMO PATRÓN QUE LAS CASAS */}
+                            <div
+                                style={{
+                                    width: "100%",
+                                    aspectRatio: "4/3",
+                                    background: `linear-gradient(135deg, ${C.sunsetL} 0%, ${C.off} 100%)`,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    padding: 16,
+                                    position: "relative",
+                                }}
+                            >
+                                <img
+                                    src={terreno.imagen}
+                                    alt={terreno.nombre}
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "contain",  // Mismo que las casas
+                                    }}
+                                />
+                                {terreno.destacado && (
+                                    <div
+                                        style={{
+                                            position: "absolute",
+                                            top: 12,
+                                            left: 12,
+                                            background: C.gold,
+                                            color: "#fff",
+                                            fontSize: 11,
+                                            fontWeight: 700,
+                                            padding: "4px 12px",
+                                            borderRadius: 20,
+                                        }}
+                                    >
+                                        ⭐ DESTACADO
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Contenido */}
+                            <div style={{ padding: "24px" }}>
+                                <h3
+                                    style={{
+                                        fontSize: 20,
+                                        fontWeight: 800,
+                                        color: C.navy,
+                                        marginBottom: 8,
+                                    }}
+                                >
+                                    {terreno.nombre}
+                                </h3>
+
+                                <p
+                                    style={{
+                                        fontSize: 13,
+                                        color: C.muted,
+                                        marginBottom: 16,
+                                        lineHeight: 1.5,
+                                    }}
+                                >
+                                    {terreno.descripcion}
+                                </p>
+
+                                {/* Etiquetas */}
+                                <div style={{ marginBottom: 20, display: "flex", flexWrap: "wrap", gap: 6 }}>
+                                    {terreno.etiquetas.map((tag, idx) => (
+                                        <span
+                                            key={idx}
+                                            style={{
+                                                display: "inline-block",
+                                                background: C.sunsetL,
+                                                color: C.terracota,
+                                                fontSize: 11,
+                                                fontWeight: 700,
+                                                padding: "4px 10px",
+                                                borderRadius: 20,
+                                            }}
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                {/* Medidas */}
+                                <div
+                                    style={{
+                                        background: C.off,
+                                        borderRadius: 12,
+                                        padding: "16px",
+                                        marginBottom: 20,
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            marginBottom: 12,
+                                            paddingBottom: 12,
+                                            borderBottom: `1px solid ${C.border}`,
+                                        }}
+                                    >
+                                        <span style={{ color: C.muted, fontSize: 13 }}>📐 Metros totales</span>
+                                        <span style={{ fontWeight: 800, color: C.text, fontSize: 18 }}>
+                                            {terreno.metrosCuadrados} m²
+                                        </span>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            marginBottom: 12,
+                                            paddingBottom: 12,
+                                            borderBottom: `1px solid ${C.border}`,
+                                        }}
+                                    >
+                                        <span style={{ color: C.muted, fontSize: 13 }}>💰 Precio por m²</span>
+                                        <span style={{ fontWeight: 700, color: C.sunset, fontSize: 16 }}>
+                                            ${formatNumber(terreno.precioPorMetro)} MXN
+                                        </span>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "baseline",
+                                        }}
+                                    >
+                                        <span style={{ color: C.muted, fontSize: 13 }}>💵 Precio total</span>
+                                        <span style={{ fontWeight: 800, color: C.navy, fontSize: 22 }}>
+                                            ${formatNumber(terreno.precioTotal)} MXN
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Botón con colores de terrenos */}
+                                <BtnGold
+                                    href={WA_LINK_TERRENO}
+                                    full
+                                    style={{ 
+                                        justifyContent: "center", 
+                                        gap: 6,
+                                        background: C.sunset,
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    📞 Me interesa este terreno
+                                </BtnGold>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Modal para ver imagen ampliada - como en GaleriaEspacios */}
+                {selectedImage && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: "rgba(0,0,0,0.95)",
+                            zIndex: 1000,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            backdropFilter: "blur(8px)",
+                        }}
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div style={{ maxWidth: "90vw", maxHeight: "90vh", position: "relative" }}>
+                            <img
+                                src={selectedImage.imagen}
+                                alt={selectedImage.nombre}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                    borderRadius: 12,
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    bottom: -40,
+                                    left: 0,
+                                    right: 0,
+                                    textAlign: "center",
+                                    color: "#fff",
+                                    fontSize: 14,
+                                }}
+                            >
+                                <strong>{selectedImage.nombre}</strong> - {selectedImage.descripcion}
+                            </div>
+                            <button
+                                style={{
+                                    position: "absolute",
+                                    top: -40,
+                                    right: 0,
+                                    background: "none",
+                                    border: "none",
+                                    color: "#fff",
+                                    fontSize: 28,
+                                    cursor: "pointer",
+                                    padding: "8px 16px",
+                                }}
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                ✕ Cerrar
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Banner adicional */}
+                <div
+                    style={{
+                        marginTop: 48,
+                        background: `linear-gradient(135deg, ${C.terracota}20 0%, ${C.sunset}20 100%)`,
+                        borderRadius: 16,
+                        padding: "24px",
+                        textAlign: "center",
+                        border: `1px solid ${C.sunset}40`,
+                    }}
+                >
+                    <p style={{ fontSize: 14, color: C.text, marginBottom: 16 }}>
+                        🌟 ¿Buscas un terreno con medidas diferentes? Contáctanos y te ayudamos a encontrar
+                        lo que necesitas.
+                    </p>
+                    <BtnGold href={WA_LINK_GENERAL} style={{ padding: "10px 24px", fontSize: 13 }}>
+                        Consultar más opciones
+                    </BtnGold>
+                </div>
+            </div>
+        </section>
+    )
+}
 // ─── CONTACTO ──────────────────────────────────────────────────────────────
 function Contacto() {
     useEffect(() => {
@@ -2858,6 +3217,7 @@ export default function PrivadaAndares() {
             <Amenidades />
             <Croquis />
             <Ubicacion />
+            <Terrenos />
             <Contacto />
             <AvisoPrivacidad />
             <Footer />
