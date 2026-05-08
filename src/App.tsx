@@ -2322,38 +2322,38 @@ function Ubicacion() {
 const TERRENOS = [
     {
         id: 1,
-        nombre: "Terreno Vista al Valle",
-        metrosCuadrados: 220,
-        precioPorMetro: 4500,
-        precioTotal: 990000,
-        etiquetas: ["🎯 Precio a tratar", "🌄 Vista panorámica"],
+        nombre: "Terreno en Ocoyoacac",
+        metrosCuadrados: 798,
+        precioPorMetro: 3750,
+        precioTotal: 2,992,500,
+        etiquetas: ["📍 Ocoyoacac, EdoMex.","🎯 Precio a tratar"],
         destacado: true,
         imagen: IMG.terreno1,  // 👈 Usando IMG en lugar de URL directa
-        descripcion: "Preciosa vista al valle de Toluca, terreno en zona de crecimiento.",
+        descripcion: "Listo para construir, completamente bardeado, limpio y con todos los servicios",
     },
     {
         id: 2,
-        nombre: "Terreno Esquinero",
-        metrosCuadrados: 310,
-        precioPorMetro: 5200,
-        precioTotal: 1612000,
-        etiquetas: ["📍 Esquinero", "📐 Más grande"],
+        nombre: "Terreno en Capulhuac",
+        metrosCuadrados: 477,
+        precioPorMetro: 1700,
+        precioTotal: 810,900,
+        etiquetas: [📍 Capulhuac,EdoMex],
         destacado: false,
         imagen: IMG.terreno2,
-        descripcion: "Ubicación estratégica en esquina con alta visibilidad.",
+        descripcion: "Excelente ubicación, fácil acceso y entorno tranquilo",
     },
     {
         id: 3,
-        nombre: "Terreno Residencial",
-        metrosCuadrados: 180,
-        precioPorMetro: 4800,
-        precioTotal: 864000,
-        etiquetas: ["🎯 Precio a tratar"],
+        nombre: "Terreno en Xometitla",
+        metrosCuadrados: 6900,
+        precioPorMetro: 1850,
+        precioTotal: 12,765,000,
+        etiquetas: ["📍 Xometitla, Capulhuac, EdoMex",],
         destacado: false,
         imagen: IMG.terreno3,
-        descripcion: "Ideal para construir tu hogar en zona tranquila.",
+        descripcion: "Excelente ubicación, fácil acceso y gran potencial de inversión",
     },
-    {
+    {/*
         id: 4,
         nombre: "Terreno Club de Golf",
         metrosCuadrados: 450,
@@ -2363,7 +2363,7 @@ const TERRENOS = [
         destacado: true,
         imagen: IMG.terreno4,
         descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
-    },
+    */},
 ]
 
 function Terrenos() {
@@ -2388,8 +2388,8 @@ function Terrenos() {
                     badge="TERRENOS DISPONIBLES"
                     badgeBg={C.sunsetL}
                     badgeColor={C.sunset}
-                    title="Invierte en tu terreno en Capulhuac"
-                    sub="Precios por metro cuadrado desde $3,800 MXN. Terrenos con gran plusvalía en la zona."
+                    title="Invierte en tu terreno"
+                    sub="Precios por metro cuadrado desde $1,7000 MXN. Terrenos con gran plusvalía"
                     center
                 />
 
