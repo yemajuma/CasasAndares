@@ -2548,7 +2548,7 @@ function Terrenos() {
                                             ${formatNumber(terreno.precioPorMetro)} MXN
                                         </span>
                                     </div>
-                                    <div
+                                    {/* <div
                                         style={{
                                             display: "flex",
                                             justifyContent: "space-between",
@@ -2560,7 +2560,7 @@ function Terrenos() {
                                             ${formatNumber(terreno.precioTotal)} MXN
                                         </span>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 {/* Botón con colores de terrenos */}
                                 <BtnGold
