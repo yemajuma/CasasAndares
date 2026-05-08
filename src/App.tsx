@@ -1833,6 +1833,7 @@ function GaleriaEspacios() {
                     ))}
                 </div>
 
+                {/* Modal para ver imagen ampliada */}
                 {selectedImage && (
                     <div
                         style={{
@@ -2388,7 +2389,7 @@ function Terrenos() {
                     badgeBg={C.sunsetL}
                     badgeColor={C.sunset}
                     title="Invierte en tu terreno"
-                    sub="Precios por metro cuadrado desde $1,700 MXN. Terrenos con gran plusvalía"
+                    sub="Precios por metro cuadrado desde $1,7000 MXN. Terrenos con gran plusvalía"
                     center
                 />
 
@@ -2425,6 +2426,7 @@ function Terrenos() {
                             }}
                             onClick={() => setSelectedImage(terreno)}
                         >
+                            {/* Contenedor de imagen - SIGUIENDO EL MISMO PATRÓN QUE LAS CASAS */}
                             <div
                                 style={{
                                     width: "100%",
@@ -2443,7 +2445,7 @@ function Terrenos() {
                                     style={{
                                         width: "100%",
                                         height: "100%",
-                                        objectFit: "contain",
+                                        objectFit: "contain",  // Mismo que las casas
                                     }}
                                 />
                                 {terreno.destacado && (
@@ -2465,6 +2467,7 @@ function Terrenos() {
                                 )}
                             </div>
 
+                            {/* Contenido */}
                             <div style={{ padding: "24px" }}>
                                 <h3
                                     style={{
@@ -2488,6 +2491,7 @@ function Terrenos() {
                                     {terreno.descripcion}
                                 </p>
 
+                                {/* Etiquetas */}
                                 <div style={{ marginBottom: 20, display: "flex", flexWrap: "wrap", gap: 6 }}>
                                     {terreno.etiquetas.map((tag, idx) => (
                                         <span
@@ -2507,6 +2511,7 @@ function Terrenos() {
                                     ))}
                                 </div>
 
+                                {/* Medidas */}
                                 <div
                                     style={{
                                         background: C.off,
@@ -2533,6 +2538,9 @@ function Terrenos() {
                                         style={{
                                             display: "flex",
                                             justifyContent: "space-between",
+                                            marginBottom: 12,
+                                            paddingBottom: 12,
+                                            borderBottom: `1px solid ${C.border}`,
                                         }}
                                     >
                                         <span style={{ color: C.muted, fontSize: 13 }}>💰 Precio por m²</span>
@@ -2540,8 +2548,21 @@ function Terrenos() {
                                             ${formatNumber(terreno.precioPorMetro)} MXN
                                         </span>
                                     </div>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            alignItems: "baseline",
+                                        }}
+                                    >
+                                        <span style={{ color: C.muted, fontSize: 13 }}>💵 Precio total</span>
+                                        <span style={{ fontWeight: 800, color: C.navy, fontSize: 22 }}>
+                                            ${formatNumber(terreno.precioTotal)} MXN
+                                        </span>
+                                    </div>
                                 </div>
 
+                                {/* Botón con colores de terrenos */}
                                 <BtnGold
                                     href={WA_LINK_TERRENO}
                                     full
@@ -2558,91 +2579,6 @@ function Terrenos() {
                         </div>
                     ))}
                 </div>
-
-                {selectedImage && (
-                    <div
-                        style={{
-                            position: "fixed",
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            background: "rgba(0,0,0,0.95)",
-                            zIndex: 1000,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            cursor: "pointer",
-                            backdropFilter: "blur(8px)",
-                        }}
-                        onClick={() => setSelectedImage(null)}
-                    >
-                        <div style={{ maxWidth: "90vw", maxHeight: "90vh", position: "relative" }}>
-                            <img
-                                src={selectedImage.imagen}
-                                alt={selectedImage.nombre}
-                                style={{
-                                    width: "100%",
-                                    height: "100%",
-                                    objectFit: "contain",
-                                    borderRadius: 12,
-                                }}
-                            />
-                            <div
-                                style={{
-                                    position: "absolute",
-                                    bottom: -40,
-                                    left: 0,
-                                    right: 0,
-                                    textAlign: "center",
-                                    color: "#fff",
-                                    fontSize: 14,
-                                }}
-                            >
-                                <strong>{selectedImage.nombre}</strong> - {selectedImage.descripcion}
-                            </div>
-                            <button
-                                style={{
-                                    position: "absolute",
-                                    top: -40,
-                                    right: 0,
-                                    background: "none",
-                                    border: "none",
-                                    color: "#fff",
-                                    fontSize: 28,
-                                    cursor: "pointer",
-                                    padding: "8px 16px",
-                                }}
-                                onClick={() => setSelectedImage(null)}
-                            >
-                                ✕ Cerrar
-                            </button>
-                        </div>
-                    </div>
-                )}
-
-                <div
-                    style={{
-                        marginTop: 48,
-                        background: `linear-gradient(135deg, ${C.terracota}20 0%, ${C.sunset}20 100%)`,
-                        borderRadius: 16,
-                        padding: "24px",
-                        textAlign: "center",
-                        border: `1px solid ${C.sunset}`,
-                    }}
-                >
-                    <p style={{ fontSize: 14, color: C.text, marginBottom: 16 }}>
-                        🌟 ¿Buscas un terreno con medidas diferentes? Contáctanos y te ayudamos a encontrar
-                        lo que necesitas.
-                    </p>
-                    <BtnGold href={WA_LINK_GENERAL} style={{ padding: "10px 24px", fontSize: 13 }}>
-                        Consultar más opciones
-                    </BtnGold>
-                </div>
-            </div>
-        </section>
-    )
-}
 
                 {/* Modal para ver imagen ampliada - como en GaleriaEspacios */}
                 {selectedImage && (
