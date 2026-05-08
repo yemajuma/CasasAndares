@@ -1833,7 +1833,6 @@ function GaleriaEspacios() {
                     ))}
                 </div>
 
-                {/* Modal para ver imagen ampliada */}
                 {selectedImage && (
                     <div
                         style={{
