@@ -2337,7 +2337,7 @@ const TERRENOS = [
         metrosCuadrados: 477,
         precioPorMetro: 1700,
         precioTotal: 810900,
-        etiquetas: [📍 Capulhuac,EdoMex],
+        etiquetas: ["📍 Capulhuac,EdoMex"],
         destacado: false,
         imagen: IMG.terreno2,
         descripcion: "Excelente ubicación, fácil acceso y entorno tranquilo",
