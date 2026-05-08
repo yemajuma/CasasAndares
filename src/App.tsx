@@ -2326,7 +2326,7 @@ const TERRENOS = [
         metrosCuadrados: 798,
         precioPorMetro: 3750,
         precioTotal: 2992500,
-        etiquetas: ["📍 Ocoyoacac, EdoMex.","🎯 Precio a tratar"],
+        etiquetas: ["📍 Ocoyoacac, Edo. Mex.","🎯 Precio a tratar"],
         destacado: true,
         imagen: IMG.terreno1,  // 👈 Usando IMG en lugar de URL directa
         descripcion: "Listo para construir, completamente bardeado, limpio y con todos los servicios",
@@ -2337,7 +2337,7 @@ const TERRENOS = [
         metrosCuadrados: 477,
         precioPorMetro: 1700,
         precioTotal: 810900,
-        etiquetas: ["📍 Capulhuac,EdoMex"],
+        etiquetas: ["📍 Capulhuac,Edo. Mex. "],
         destacado: false,
         imagen: IMG.terreno2,
         descripcion: "Excelente ubicación, fácil acceso y entorno tranquilo",
@@ -2348,12 +2348,12 @@ const TERRENOS = [
         metrosCuadrados: 6900,
         precioPorMetro: 1850,
         precioTotal: 12765000,
-        etiquetas: ["📍 Xometitla, Capulhuac, EdoMex",],
+        etiquetas: ["📍 Xometitla, Capulhuac, Edo. Mex. ",],
         destacado: false,
         imagen: IMG.terreno3,
         descripcion: "Excelente ubicación, fácil acceso y gran potencial de inversión",
     },
-    {
+    {/*
         id: 4,
         nombre: "Terreno Club de Golf",
         metrosCuadrados: 450,
@@ -2363,7 +2363,7 @@ const TERRENOS = [
         destacado: true,
         imagen: IMG.terreno4,
         descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
-    },
+    */},
 ]
 
 function Terrenos() {
