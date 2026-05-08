@@ -2353,7 +2353,7 @@ const TERRENOS = [
         imagen: IMG.terreno3,
         descripcion: "Excelente ubicación, fácil acceso y gran potencial de inversión",
     },
-    {/*
+    {
         id: 4,
         nombre: "Terreno Club de Golf",
         metrosCuadrados: 450,
@@ -2363,7 +2363,7 @@ const TERRENOS = [
         destacado: true,
         imagen: IMG.terreno4,
         descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
-    */},
+    },
 ]
 
 function Terrenos() {
