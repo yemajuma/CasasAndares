@@ -2389,7 +2389,7 @@ function Terrenos() {
                     badgeBg={C.sunsetL}
                     badgeColor={C.sunset}
                     title="Invierte en tu terreno"
-                    sub="Precios por metro cuadrado desde $1,7000 MXN. Terrenos con gran plusvalía"
+                    sub="Precios por metro cuadrado desde $1,700 MXN. Terrenos con gran plusvalía"
                     center
                 />
 
@@ -2426,7 +2426,6 @@ function Terrenos() {
                             }}
                             onClick={() => setSelectedImage(terreno)}
                         >
-                            {/* Contenedor de imagen - SIGUIENDO EL MISMO PATRÓN QUE LAS CASAS */}
                             <div
                                 style={{
                                     width: "100%",
@@ -2445,7 +2444,7 @@ function Terrenos() {
                                     style={{
                                         width: "100%",
                                         height: "100%",
-                                        objectFit: "contain",  // Mismo que las casas
+                                        objectFit: "contain",
                                     }}
                                 />
                                 {terreno.destacado && (
@@ -2467,7 +2466,6 @@ function Terrenos() {
                                 )}
                             </div>
 
-                            {/* Contenido */}
                             <div style={{ padding: "24px" }}>
                                 <h3
                                     style={{
@@ -2491,7 +2489,6 @@ function Terrenos() {
                                     {terreno.descripcion}
                                 </p>
 
-                                {/* Etiquetas */}
                                 <div style={{ marginBottom: 20, display: "flex", flexWrap: "wrap", gap: 6 }}>
                                     {terreno.etiquetas.map((tag, idx) => (
                                         <span
@@ -2511,7 +2508,6 @@ function Terrenos() {
                                     ))}
                                 </div>
 
-                                {/* Medidas */}
                                 <div
                                     style={{
                                         background: C.off,
@@ -2538,9 +2534,6 @@ function Terrenos() {
                                         style={{
                                             display: "flex",
                                             justifyContent: "space-between",
-                                            marginBottom: 12,
-                                            paddingBottom: 12,
-                                            borderBottom: `1px solid ${C.border}`,
                                         }}
                                     >
                                         <span style={{ color: C.muted, fontSize: 13 }}>💰 Precio por m²</span>
@@ -2548,21 +2541,8 @@ function Terrenos() {
                                             ${formatNumber(terreno.precioPorMetro)} MXN
                                         </span>
                                     </div>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "space-between",
-                                            alignItems: "baseline",
-                                        }}
-                                    >
-                                        <span style={{ color: C.muted, fontSize: 13 }}>💵 Precio total</span>
-                                        <span style={{ fontWeight: 800, color: C.navy, fontSize: 22 }}>
-                                            ${formatNumber(terreno.precioTotal)} MXN
-                                        </span>
-                                    </div>
                                 </div>
 
-                                {/* Botón con colores de terrenos */}
                                 <BtnGold
                                     href={WA_LINK_TERRENO}
                                     full
@@ -2580,7 +2560,6 @@ function Terrenos() {
                     ))}
                 </div>
 
-                {/* Modal para ver imagen ampliada - como en GaleriaEspacios */}
                 {selectedImage && (
                     <div
                         style={{
@@ -2643,7 +2622,6 @@ function Terrenos() {
                     </div>
                 )}
 
-                {/* Banner adicional */}
                 <div
                     style={{
                         marginTop: 48,
@@ -2651,7 +2629,7 @@ function Terrenos() {
                         borderRadius: 16,
                         padding: "24px",
                         textAlign: "center",
-                        border: `1px solid ${C.sunset}40`,
+                        border: `1px solid ${C.sunset}`,
                     }}
                 >
                     <p style={{ fontSize: 14, color: C.text, marginBottom: 16 }}>
