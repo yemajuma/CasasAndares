@@ -2353,17 +2353,17 @@ const TERRENOS = [
         imagen: IMG.terreno3,
         descripcion: "Excelente ubicación, fácil acceso y gran potencial de inversión",
     },
-    {
-        id: 4,
-        nombre: "Terreno Club de Golf",
-        metrosCuadrados: 450,
-        precioPorMetro: 3800,
-        precioTotal: 1710000,
-        etiquetas: ["⛳ Frente al club", "🌳 Área verde", "🎯 Precio negociable"],
-        destacado: true,
-        imagen: IMG.terreno4,
-        descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
-    },
+    // {
+    //  id: 4,
+    //  nombre: "Terreno Club de Golf",
+    //  metrosCuadrados: 450,
+    //  precioPorMetro: 3800,
+    // precioTotal: 1710000,
+    // etiquetas: ["⛳ Frente al club", "🌳 Área verde", "🎯 Precio negociable"],
+    // destacado: true,
+    // imagen: IMG.terreno4,
+    // descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
+   // },
 ]
 
 function Terrenos() {
