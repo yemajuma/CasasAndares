@@ -31,7 +31,7 @@ const WA_LINK_CITA = `https://wa.me/${WA_NUM}?text=${WA_MSG_CITA}`
 const WA_LINK_GENERAL = `https://wa.me/${WA_NUM}?text=${WA_MSG_GENERAL}`
 const WA_LINK_TERRENO = `https://wa.me/${WA_NUM}?text=${WA_MSG_TERRENO}`
 
-const TALLY_ID = "LZY062"
+const TALLY_ID = "LZY06"
 
 // ─── COLORES ────────────────────────────────────────────────────────────────
 const C = {
@@ -84,7 +84,7 @@ const PROYECTO = {
     nombre: "Tu nuevo hogar",
     tagline: "Tu hogar en un entorno privado y seguro",
     desc: "Casas Andares es un desarrollo exclusivo en Xometitla, Capulhuac, Estado de México, con 10 casas de dos plantas en un complejo cerrado con vigilancia 24/7. Cada casa cuenta con 99 m² de predio y 139 m² de construcción, diseñada para familias que buscan comodidad, seguridad y calidad de vida.",
-    venta: "$2,850,000 MXN",
+    venta: "Consultar precio", // revisar bien el precio en la proxima reunion
     renta: "$9,000 / mes",
     predio: "99 m²",
     construccion: "139 m²",
@@ -2397,7 +2397,7 @@ function Terrenos() {
                     badgeBg={C.sunsetL}
                     badgeColor={C.sunset}
                     title="Invierte en tu terreno"
-                    sub="Precios por metro cuadrado desde $1,700 MXN. Terrenos con gran plusvalía"
+                    sub="Precios por metro cuadrado desde $980 MXN. Terrenos con gran plusvalía"
                     center
                 />
 
