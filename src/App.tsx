@@ -76,7 +76,7 @@ const IMG = {
     terreno1: "https://i.postimg.cc/kgt3B6CL/OCOYOACAC-AEREA.png",  // Cambia por tu imagen
     terreno2: "https://i.postimg.cc/RF4jsgHy/Capulhuac-AEREA.jpg",
     terreno3: "https://i.postimg.cc/N07nHRz4/Xometitla-AEREA.jpg",
-    terreno4: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
+    terreno4: "https://i.postimg.cc/m275RfmC/ALMAYA-AEREA.jpg",
 }
 
 // ─── DATOS DEL PROYECTO ─────────────────────────────────────────────────────
@@ -98,7 +98,7 @@ const PLANTA_BAJA = [
     "Sala – comedor amplio",
     "Cocina integral con campana extractora, parrilla y tarja",
     "Medio baño de visitas",
-    "Estacionamiento techado (1 cajón)",
+    "Estacionamiento techado (2 cajones)",
     "Jardín privado",
     "Escaleras con domo de iluminación natural",
     "Área de lavado",
@@ -136,7 +136,7 @@ const AMENIDADES = [
     {
         icon: "🏋️",
         titulo: "Gimnasio",
-        desc: "Suscripción a gimnasio disponible para residentes a precio preferencial.",
+        desc: "Gimnasio disponible para residentes",
     },
     {
         icon: "👕",
@@ -1574,10 +1574,10 @@ function DistribucionGaleria() {
                         }}
                     >
                         {[
-                            { icon: "💧", text: "Tinaco de 1,500 litros" },
+                            { icon: "💧", text: "Tinaco de 1,100 litros" },
                             {
                                 icon: "⛽",
-                                text: "Tanque estacionario de gas 100 litros",
+                                text: "Tanque estacionario de gas 300 litros",
                             },
                             { icon: "🔥", text: "Calentador de piso" },
                             {
@@ -2423,7 +2423,7 @@ function Terrenos() {
                                 cursor: "pointer",
                             }}
                             onMouseEnter={(e) => {
-                                e.currentTarget.style.transform = "translateY(-8px)"
+                                e.currentTarget.style.transform = "transeY(-8px)"
                                 e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.12)"
                             }}
                             onMouseLeave={(e) => {
