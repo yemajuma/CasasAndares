@@ -2323,6 +2323,8 @@ const TERRENOS = [
     {
         id: 1,
         nombre: "Terreno en Ocoyoacac",
+        lat: 19.276277,   // 👈 agrega esto
+        lng: -99.466222,  // 👈 agrega esto
         metrosCuadrados: 798,
         precioPorMetro: 3750,
         precioTotal: 2992500,
@@ -2334,6 +2336,8 @@ const TERRENOS = [
     {
         id: 2,
         nombre: "Terreno en Capulhuac",
+        lat: 19.217972,   // 👈 agrega esto
+        lng: -99.462583,  // 👈 agrega esto
         metrosCuadrados: 477,
         precioPorMetro: 1700,
         precioTotal: 810900,
@@ -2345,25 +2349,29 @@ const TERRENOS = [
     {
         id: 3,
         nombre: "Terreno en Xometitla",
+        lat: 19.193361,   // 👈 agrega esto
+        lng: -99.477110,  // 👈 agrega esto
         metrosCuadrados: 6900,
         precioPorMetro: 1850,
         precioTotal: 12765000,
-        etiquetas: ["📍 Xometitla, Capulhuac, Edo. Mex. ",],
+        etiquetas: ["📍 Xometitla, Capulhuac, Edo. Mex."],
         destacado: false,
         imagen: IMG.terreno3,
         descripcion: "Excelente ubicación, fácil acceso y gran potencial de inversión",
     },
-    // {
-    //  id: 4,
-    //  nombre: "Terreno Club de Golf",
-    //  metrosCuadrados: 450,
-    //  precioPorMetro: 3800,
-    // precioTotal: 1710000,
-    // etiquetas: ["⛳ Frente al club", "🌳 Área verde", "🎯 Precio negociable"],
-    // destacado: true,
-    // imagen: IMG.terreno4,
-    // descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
-   // },
+    {
+        id: 4,
+        nombre: "Terreno en Ocoyoacac",
+        lat: 19.240722,   // 👈 agrega esto
+        lng: -99.462667,  // 👈 agrega esto
+        metrosCuadrados: 642.5,
+        precioPorMetro: 980,
+        precioTotal: 1710000,
+        etiquetas: ["📍 San Miguel Almaya, Capulhuac, Edo. Mex."],
+        destacado: true,
+        imagen: IMG.terreno4,
+        descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
+    },
 ]
 
 function Terrenos() {
@@ -2555,6 +2563,20 @@ function Terrenos() {
                                 >
                                     📞 Me interesa este terreno
                                 </BtnGold>
+                                <BtnOutline
+                                    href={`https://www.google.com/maps?q=${terreno.lat},${terreno.lng}`}
+                                    full
+                                    style={{ 
+                                        justifyContent: "center", 
+                                        gap: 6, 
+                                        marginTop: 10,
+                                        borderColor: C.sunset,
+                                        color: C.sunset,
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    🗺️ Ver ubicación en Google Maps
+                                </BtnOutline>
                             </div>
                         </div>
                     ))}
