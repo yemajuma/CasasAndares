@@ -3052,10 +3052,10 @@ function AvisoPrivacidad() {
                                     >
                                         📧{" "}
                                         <a
-                                            href="mailto:contacto.sartor.inmobiliaria@gmail.com"
+                                            href="mailto:contacto.inmobiliaria@gmail.com"
                                             style={{ color: C.gold }}
                                         >
-                                            contacto.sartor.inmobiliaria@gmail.com
+                                            contacto.inmobiliaria@gmail.com
                                         </a>
                                     </p>
                                 </>
