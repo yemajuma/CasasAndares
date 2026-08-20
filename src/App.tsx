@@ -1059,8 +1059,7 @@ function Casas() {
                     sub="Un solo prototipo de casa, diseñado con todo lo que necesitas para vivir cómodamente."
                 />
 
-/*
-                {/* Banner bono */}
+                /*{/* Banner bono */}
                 <div
                     style={{
                         background: `linear-gradient(135deg, ${C.goldL} 0%, #fff8e8 100%)`,
@@ -1120,8 +1119,7 @@ function Casas() {
                     >
                         💬 Quiero saber más
                     </a>*/}
-                </div> 
-*/
+                </div> */
                 
                 {/* Tarjetas de VENTA y RENTA - UNA AL LADO DE LA OTRA */}
                 <div
