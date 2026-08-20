@@ -781,7 +781,7 @@ function Hero() {
         </section>
     )
 }
-
+/*
 // ─── BANNER DE BONO ────────────────────────────────────────────────────────
 function BannerBono() {
     const [visible, setVisible] = useState(true)
@@ -933,7 +933,7 @@ function BannerBono() {
         </div>
     )
 }
-
+*/
 // ─── DESCRIPCIÓN ─────────────────────────────────────────────────────────
 function Descripcion() {
     return (
