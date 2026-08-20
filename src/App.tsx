@@ -1058,6 +1058,7 @@ function Casas() {
                     title="3 en venta y 7 en renta"
                     sub="Un solo prototipo de casa, diseñado con todo lo que necesitas para vivir cómodamente."
                 />
+
 /*
                 {/* Banner bono */}
                 <div
@@ -1119,8 +1120,9 @@ function Casas() {
                     >
                         💬 Quiero saber más
                     </a>*/}
-                </div>
+                </div> 
 */
+                
                 {/* Tarjetas de VENTA y RENTA - UNA AL LADO DE LA OTRA */}
                 <div
                     style={{
