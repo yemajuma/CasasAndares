@@ -781,159 +781,159 @@ function Hero() {
         </section>
     )
 }
-/*
+
 // ─── BANNER DE BONO ────────────────────────────────────────────────────────
-function BannerBono() {
-    const [visible, setVisible] = useState(true)
-    if (!visible) return null
-    return (
-        <div
-            style={{
-                background: `linear-gradient(90deg, ${C.gold} 0%, #d4a93a 50%, ${C.gold} 100%)`,
-                padding: "0",
-                position: "relative",
-                overflow: "hidden",
-            }}
-        >
-            <div
-                style={{
-                    position: "absolute",
-                    inset: 0,
-                    backgroundImage:
-                        "repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1px, transparent 1px, transparent 20px)",
-                    pointerEvents: "none",
-                }}
-            />
-            <div
-                style={{
-                    maxWidth: 1440,
-                    margin: "0 auto",
-                    padding: "clamp(18px, 4vw, 28px) 5%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    gap: 20,
-                    flexWrap: "wrap",
-                    position: "relative",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "clamp(12px, 3vw, 24px)",
-                        flexWrap: "wrap",
-                    }}
-                >
-                    <div
-                        style={{
-                            background: "rgba(255,255,255,.2)",
-                            borderRadius: "50%",
-                            width: 52,
-                            height: 52,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: 26,
+//function BannerBono() {
+ //   const [visible, setVisible] = useState(true)
+ //   if (!visible) return null
+  //  return (
+    //    <div
+    //        style={{
+       //         background: `linear-gradient(90deg, ${C.gold} 0%, #d4a93a 50%, ${C.gold} 100%)`,
+        //        padding: "0",
+      //          position: "relative",
+      //          overflow: "hidden",
+        //    }}
+      //  >
+       //     <div
+        //        style={{
+        //            position: "absolute",
+         //           inset: 0,
+          //          backgroundImage:
+        //                "repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1px, transparent 1px, transparent 20px)",
+        //            pointerEvents: "none",
+       //         }}
+       //     />
+      //      <div
+      //          style={{
+       //             maxWidth: 1440,
+      //              margin: "0 auto",
+     //               padding: "clamp(18px, 4vw, 28px) 5%",
+   //                 display: "flex",
+   //                 alignItems: "center",
+    //                justifyContent: "space-between",
+    //                gap: 20,
+    //                flexWrap: "wrap",
+   //                 position: "relative",
+   //             }}
+   //         >
+   //             <div
+   //                 style={{
+   //                     display: "flex",
+   //                     alignItems: "center",
+   //                     gap: "clamp(12px, 3vw, 24px)",
+    //                    flexWrap: "wrap",
+    //                }}
+    //            >
+    //                <div
+    //                    style={{
+     //                       background: "rgba(255,255,255,.2)",
+     //                       borderRadius: "50%",
+       //                     width: 52,
+         //                   height: 52,
+         //                   display: "flex",
+           //                 alignItems: "center",
+             //               justifyContent: "center",
+              //              fontSize: 26,
                             flexShrink: 0,
-                            border: "2px solid rgba(255,255,255,.35)",
+  //                          border: "2px solid rgba(255,255,255,.35)",
+    //                    }}
+      //              >
+        //                🎁
+          //          </div>
+            //        <div>
+              //          <div
+                //            style={{
+                  //              fontSize: "clamp(11px, 3vw, 12px)",
+//                                fontWeight: 800,
+  //                              color: "rgba(255,255,255,.85)",
+    //                            letterSpacing: ".12em",
+      //                          textTransform: "uppercase",
+        //                        marginBottom: 4,
+          //                  }}
+            //            >
+              //              ¡Oferta por tiempo limitado!
+                //        </div>
+                  //      <div
+                    //        style={{
+//                                fontSize: "clamp(16px, 4vw, 22px)",
+  //                              fontWeight: 800,
+    //                            color: "#fff",
+      //                          lineHeight: 1.2,
+        //                    }}
+          //              >
+            //                Bono especial en la compra de tu casa 🏠
+              //          </div>
+                //        <div
+                  //          style={{
+//                                fontSize: "clamp(12px, 3vw, 14px)",
+  //                              color: "rgba(255,255,255,.85)",
+    //                            marginTop: 4,
+      //                      }}
+        //                >
+          //                  Al comprar tu casa, recibes un bono exclusivo.
+            //                Pregunta por las condiciones —{" "}
+              //              <strong style={{ color: "#fff" }}>
+                //                ¡casas disponibles ahora!
+                  //          </strong>
+//                        </div>
+  //                  </div>
+    //            </div>
+      //          <div
+        //            style={{
+          //              display: "flex",
+            //            alignItems: "center",
+  //                      gap: 12,
+    //                    flexShrink: 0,
+      //              }}
+        //        >
+          //         {/* <a
+            //            href={WA_LINK_CITA}
+              //          target="_blank"
+                //        rel="noreferrer"
+                  //      style={{
+                    //        background: "#fff",
+                      //      color: C.gold,
+    //                        fontSize: "clamp(12px, 3vw, 14px)",
+      //                      fontWeight: 800,
+        //                    padding: "10px 22px",
+          //                  borderRadius: 6,
+            //                textDecoration: "none",
+              //              letterSpacing: ".02em",
+                //            boxShadow: "0 4px 14px rgba(0,0,0,.15)",
+                  //          display: "inline-flex",
+                    //        alignItems: "center",
+                      //      gap: 6,
                         }}
-                    >
-                        🎁
-                    </div>
-                    <div>
-                        <div
-                            style={{
-                                fontSize: "clamp(11px, 3vw, 12px)",
-                                fontWeight: 800,
-                                color: "rgba(255,255,255,.85)",
-                                letterSpacing: ".12em",
-                                textTransform: "uppercase",
-                                marginBottom: 4,
-                            }}
-                        >
-                            ¡Oferta por tiempo limitado!
-                        </div>
-                        <div
-                            style={{
-                                fontSize: "clamp(16px, 4vw, 22px)",
-                                fontWeight: 800,
-                                color: "#fff",
-                                lineHeight: 1.2,
-                            }}
-                        >
-                            Bono especial en la compra de tu casa 🏠
-                        </div>
-                        <div
-                            style={{
-                                fontSize: "clamp(12px, 3vw, 14px)",
-                                color: "rgba(255,255,255,.85)",
-                                marginTop: 4,
-                            }}
-                        >
-                            Al comprar tu casa, recibes un bono exclusivo.
-                            Pregunta por las condiciones —{" "}
-                            <strong style={{ color: "#fff" }}>
-                                ¡casas disponibles ahora!
-                            </strong>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 12,
-                        flexShrink: 0,
-                    }}
-                >
-                   {/* <a
-                        href={WA_LINK_CITA}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                            background: "#fff",
-                            color: C.gold,
-                            fontSize: "clamp(12px, 3vw, 14px)",
-                            fontWeight: 800,
-                            padding: "10px 22px",
-                            borderRadius: 6,
-                            textDecoration: "none",
-                            letterSpacing: ".02em",
-                            boxShadow: "0 4px 14px rgba(0,0,0,.15)",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: 6,
-                        }}
-                    >
-                        💬 Quiero mi bono
-                    </a> */}
-                    <button
-                        onClick={() => setVisible(false)}
-                        style={{
-                            background: "rgba(255,255,255,.2)",
-                            border: "none",
-                            cursor: "pointer",
-                            color: "#fff",
-                            borderRadius: "50%",
-                            width: 30,
-                            height: 30,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: 16,
-                            fontWeight: 700,
-                            flexShrink: 0,
-                        }}
-                    >
-                        ✕
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
-}
-*/
+//                    >
+  //                      💬 Quiero mi bono
+    //                </a> */}
+      //              <button
+        //                onClick={() => setVisible(false)}
+          //              style={{
+            //                background: "rgba(255,255,255,.2)",
+              //              border: "none",
+                //            cursor: "pointer",
+                  //          color: "#fff",
+                    //        borderRadius: "50%",
+                      //      width: 30,
+//                            height: 30,
+  //                          display: "flex",
+    //                        alignItems: "center",
+      //                      justifyContent: "center",
+        //                    fontSize: 16,
+          //                  fontWeight: 700,
+            //                flexShrink: 0,
+              //          }}
+//                    >
+//                        ✕
+  //                  </button>
+//                </div>
+//            </div>
+//        </div>
+//    )
+//}
+
 // ─── DESCRIPCIÓN ─────────────────────────────────────────────────────────
 function Descripcion() {
     return (
