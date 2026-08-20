@@ -3204,7 +3204,7 @@ export default function PrivadaAndares() {
             <style>{`... tus estilos ...`}</style>
             <Navbar />
             <Hero />
-           /* <BannerBono /> */
+            {/* <BannerBono /> */}
             <Descripcion />
 
             {/* SECCIÓN 1: SOLO VENTA/RENTA */}
