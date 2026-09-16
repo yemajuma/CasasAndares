@@ -56,7 +56,7 @@ const C = {
 
 // ─── IMÁGENES ────────────────────────────────────────────────────────────────
 const IMG = {
-    hero: "https://i.postimg.cc/3NQLg6QL/IMAGEN2.png",
+    hero: "https://i.postimg.cc/GpfjNDmN/Chat-GPT-Image-16-sept-2026-12-47-12-p-m.png",
     casaA: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
     casaB: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
     sala: "https://i.postimg.cc/9M34Qt95/Sala-Comedor.jpg",
