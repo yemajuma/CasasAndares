@@ -835,7 +835,7 @@ function Hero() {
            //                 alignItems: "center",
              //               justifyContent: "center",
               //              fontSize: 26,
-                            flexShrink: 0,
+                            // flexShrink: 0,
   //                          border: "2px solid rgba(255,255,255,.35)",
     //                    }}
       //              >
