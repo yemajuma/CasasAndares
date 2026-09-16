@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 
 // ─── CONFIGURACIÓN ─────────────────────────────────────────────────────────
 // ─── CONFIGURACIÓN DE WHATSAPP ────────────────────────────────────────────────
@@ -31,7 +31,6 @@ const WA_LINK_CITA = `https://wa.me/${WA_NUM}?text=${WA_MSG_CITA}`
 const WA_LINK_GENERAL = `https://wa.me/${WA_NUM}?text=${WA_MSG_GENERAL}`
 const WA_LINK_TERRENO = `https://wa.me/${WA_NUM}?text=${WA_MSG_TERRENO}`
 
-const TALLY_ID = "LZY06"
 
 // ─── COLORES ────────────────────────────────────────────────────────────────
 const C = {
@@ -64,7 +63,6 @@ const IMG = {
     cocina: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
     recamara: "https://i.postimg.cc/prCyCw6W/RECAMARA-PRINCIPAL.jpg",
     jardin: "https://i.postimg.cc/wBNvZyGG/jardi-n.jpg",
-    cancha: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80",
     croquis: "https://i.postimg.cc/kGnqSns9/CD3529A8-7069-4F8B-ADFA-539A7BC98BE1-1-201-a.jpg",
     fachada: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
     comedor:
@@ -124,11 +122,6 @@ const AMENIDADES = [
         desc: "Portón eléctrico y puerta peatonal con control remoto en el único acceso.",
     },
     {
-        icon: "👮",
-        titulo: "Caseta de Vigilancia",
-        desc: "Personal de seguridad 24/7 en la entrada del fraccionamiento.",
-    },
-    {
         icon: "⚽",
         titulo: "Cancha de Fútbol Rápido",
         desc: "Cancha de uso exclusivo para residentes y sus familias.",
@@ -136,17 +129,7 @@ const AMENIDADES = [
     {
         icon: "🏋️",
         titulo: "Gimnasio",
-        desc: "Gimnasio disponible para residentes",
-    },
-    {
-        icon: "👕",
-        titulo: "Lavandería",
-        desc: "Área de lavandería de autoservicio dentro del complejo.",
-    },
-    {
-        icon: "🏪",
-        titulo: "Máquina de Snacks",
-        desc: "Máquina de bebidas y frituras disponible las 24 horas.",
+        desc: "Espacio de ejercicio y acondicionamiento para residentes.",
     },
     {
         icon: "🏢",
@@ -161,11 +144,11 @@ const AMENIDADES = [
 ]
 
 const DISTANCIAS = [
-    { lugar: "Toluca", dist: "45 min", icon: "🏙️" },
-    { lugar: "Metepec", dist: "35 min", icon: "🏘️" },
-    { lugar: "Santa Fe (CDMX)", dist: "1 hora", icon: "🌆" },
-    { lugar: "Aeropuerto Toluca", dist: "40 min", icon: "✈️" },
-    { lugar: "Plazas Outlet", dist: "35 min", icon: "🛍️" },
+    { lugar: "Chedraui Capulhuac", dist: "5 min", icon: "🛒" },
+    { lugar: "Tiendas 3B / Neto Capulhuac", dist: "5 min", icon: "🏪" },
+    { lugar: "Centro de Capulhuac", dist: "5 min", icon: "🏘️" },
+    { lugar: "Plaza San Ángel (Tianguistenco)", dist: "8 min", icon: "🛍️" },
+    { lugar: "Mine Plaza (Tianguistenco)", dist: "10 min", icon: "🛍️" },
     { lugar: "Hospital IMSS", dist: "10 min", icon: "🏥" },
 ]
 
@@ -835,7 +818,7 @@ function Hero() {
            //                 alignItems: "center",
              //               justifyContent: "center",
               //              fontSize: 26,
-                            // flexShrink: 0,
+                            //flexShrink: 0,
   //                          border: "2px solid rgba(255,255,255,.35)",
     //                    }}
       //              >
@@ -1059,68 +1042,6 @@ function Casas() {
                     sub="Un solo prototipo de casa, diseñado con todo lo que necesitas para vivir cómodamente."
                 />
 
-                /*{/* Banner bono */}
-                <div
-                    style={{
-                        background: `linear-gradient(135deg, ${C.goldL} 0%, #fff8e8 100%)`,
-                        border: `2px solid ${C.gold}`,
-                        borderRadius: 14,
-                        padding: "18px 24px",
-                        marginBottom: 32,
-                        display: "flex",
-                        flexDirection: "column",
-                        textAlign: "center",
-                        alignItems: "center",
-                        gap: 16,
-                        flexWrap: "wrap",
-                    }}
-                >
-                    <span style={{ fontSize: 28 }}>🎁</span>
-                    <div style={{ flex: 1 }}>
-                        <div
-                            style={{
-                                fontSize: 14,
-                                fontWeight: 800,
-                                color: C.gold,
-                                marginBottom: 2,
-                            }}
-                        >
-                            ¡Oferta especial de compra!
-                        </div>
-                        <div
-                            style={{
-                                fontSize: 13,
-                                color: C.text,
-                                lineHeight: 1.5,
-                            }}
-                        >
-                            Adquiere tu casa ahora y recibe un{" "}
-                            <strong>bono exclusivo</strong>. Escríbenos por
-                            WhatsApp para conocer todos los detalles.
-                        </div>
-                    </div>
-                    {/* <a
-                        href={WA_LINK_GENERAL}
-                        target="_blank"
-                        rel="noreferrer"
-                        style={{
-                            background: C.gold,
-                            color: "#fff",
-                            fontSize: 13,
-                            fontWeight: 700,
-                            padding: "10px 20px",
-                            borderRadius: 6,
-                            textDecoration: "none",
-                            flexShrink: 0,
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: 6,
-                        }}
-                    >
-                        💬 Quiero saber más
-                    </a>*/}
-                </div> */
-                
                 {/* Tarjetas de VENTA y RENTA - UNA AL LADO DE LA OTRA */}
                 <div
                     style={{
@@ -2003,59 +1924,6 @@ function Amenidades() {
                         </div>
                     ))}
                 </div>
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns:
-                            "repeat(auto-fit, minmax(280px, 1fr))",
-                        gap: 14,
-                    }}
-                >
-                    {/* Amenidades: fotos de Unsplash → cover está bien aquí */}
-                    <div
-                        style={{
-                            width: "100%",
-                            aspectRatio: "16/9",
-                            borderRadius: 14,
-                            overflow: "hidden",
-                        }}
-                    >
-                        <img
-                            src={IMG.cancha}
-                            alt="Cancha"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover",
-                                display: "block",
-                            }}
-                        />
-                    </div>
-                    {/* Foto propia → contain con fondo */}
-                    <div
-                        style={{
-                            width: "100%",
-                            aspectRatio: "16/9",
-                            borderRadius: 14,
-                            overflow: "hidden",
-                            background: C.navyL,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <img
-                            src={IMG.hero}
-                            alt="Amenidades"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "contain",
-                                display: "block",
-                            }}
-                        />
-                    </div>
-                </div>
             </div>
         </section>
     )
@@ -2668,29 +2536,6 @@ function Terrenos() {
 }
 // ─── CONTACTO ──────────────────────────────────────────────────────────────
 function Contacto() {
-    useEffect(() => {
-        const w = window as any
-        const load = () => {
-            if (w.Tally) w.Tally.loadEmbeds()
-            else
-                document
-                    .querySelectorAll("iframe[data-tally-src]:not([src])")
-                    .forEach((el: any) => {
-                        el.src = el.dataset.tallySrc
-                    })
-        }
-        const src = "https://tally.so/widgets/embed.js"
-        if (w.Tally) {
-            load()
-        } else if (!document.querySelector(`script[src="${src}"]`)) {
-            const s = document.createElement("script")
-            s.src = src
-            s.onload = load
-            s.onerror = load
-            document.body.appendChild(s)
-        } else load()
-    }, [])
-
     return (
         <section
             id="contacto"
@@ -2707,33 +2552,69 @@ function Contacto() {
                     title="¿Te interesa alguna propiedad?"
                     sub="Déjanos tus datos o escríbenos por WhatsApp. Te respondemos en menos de 24 horas."
                 />
-                <div
-                    style={{
-                        background: "rgba(255,255,255,.04)",
-                        border: "1px solid rgba(255,255,255,.08)",
-                        borderRadius: 20,
-                        padding: "clamp(20px, 5vw, 36px)",
-                        marginBottom: 24,
-                    }}
-                >
-                    <iframe
-                        data-tally-src={`https://tally.so/embed/${TALLY_ID}?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1`}
-                        loading="lazy"
-                        width="100%"
-                        height="400"
-                        style={{ border: "none", colorScheme: "light" }}
-                        title="Contacto"
-                    />
-                </div>
                 <div style={{ textAlign: "center" }}>
-                    <div
+                    <a
+                        href={`tel:+${WA_NUM}`}
                         style={{
-                            fontSize: 13,
-                            color: "rgba(255,255,255,.4)",
-                            marginBottom: 12,
+                            display: "inline-block",
+                            fontSize: "clamp(22px, 5vw, 28px)",
+                            fontWeight: 800,
+                            color: "#fff",
+                            textDecoration: "none",
+                            marginBottom: 20,
                         }}
                     >
-                        o contáctanos directamente
+                        📞 722 404 7668
+                    </a>
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: 16,
+                            justifyContent: "center",
+                            marginBottom: 28,
+                        }}
+                    >
+                        {/* 👇 Reemplaza estos # por tus links reales de Instagram / Facebook */}
+                        <a
+                            href="#"
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                fontSize: 22,
+                                textDecoration: "none",
+                                color: "#fff",
+                                background: "rgba(255,255,255,.08)",
+                                border: "1px solid rgba(255,255,255,.15)",
+                                borderRadius: "50%",
+                                width: 44,
+                                height: 44,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            📸
+                        </a>
+                        <a
+                            href="#"
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                fontSize: 22,
+                                textDecoration: "none",
+                                color: "#fff",
+                                background: "rgba(255,255,255,.08)",
+                                border: "1px solid rgba(255,255,255,.15)",
+                                borderRadius: "50%",
+                                width: 44,
+                                height: 44,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            📘
+                        </a>
                     </div>
                     <BtnOutline href={WA_LINK_CITA} light>
                         Escribir por WhatsApp
