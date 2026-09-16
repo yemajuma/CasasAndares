@@ -904,7 +904,7 @@ function Hero() {
                   //          display: "inline-flex",
                     //        alignItems: "center",
                       //      gap: 6,
-                        }}
+                        //}}
 //                    >
   //                      💬 Quiero mi bono
     //                </a> */}
