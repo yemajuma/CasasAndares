@@ -57,18 +57,16 @@ const C = {
 // ─── IMÁGENES ────────────────────────────────────────────────────────────────
 const IMG = {
     hero: "https://i.postimg.cc/GpfjNDmN/Chat-GPT-Image-16-sept-2026-12-47-12-p-m.png",
-    casaA: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
-    casaB: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
+    casaA: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
+    casaB: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
     sala: "https://i.postimg.cc/9M34Qt95/Sala-Comedor.jpg",
     cocina: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
     recamara: "https://i.postimg.cc/prCyCw6W/RECAMARA-PRINCIPAL.jpg",
     jardin: "https://i.postimg.cc/wBNvZyGG/jardi-n.jpg",
     croquis: "https://i.postimg.cc/kGnqSns9/CD3529A8-7069-4F8B-ADFA-539A7BC98BE1-1-201-a.jpg",
-    fachada: "https://i.postimg.cc/260M2CX0/Frente-Casa.png",
-    comedor:
-        "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
-    terraza:
-        "https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
+    fachada: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
+    comedor:"https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
+    terraza:"https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
     cochera: "https://i.postimg.cc/y8sCsJxQ/COCHERA.jpg",
     // 👇 AGREGAR IMÁGENES DE TERRENOS 👇
     terreno1: "https://i.postimg.cc/kgt3B6CL/OCOYOACAC-AEREA.png",  // Cambia por tu imagen
