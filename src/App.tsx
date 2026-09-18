@@ -142,11 +142,11 @@ const AMENIDADES = [
 ]
 
 const DISTANCIAS = [
-    { lugar: "Chedraui Capulhuac", dist: "5 min", icon: "🛒" },
-    { lugar: "Tiendas 3B / Neto Capulhuac", dist: "5 min", icon: "🏪" },
-    { lugar: "Centro de Capulhuac", dist: "5 min", icon: "🏘️" },
-    { lugar: "Plaza San Ángel (Tianguistenco)", dist: "8 min", icon: "🛍️" },
-    { lugar: "Mine Plaza (Tianguistenco)", dist: "10 min", icon: "🛍️" },
+    { lugar: "Chedraui Capulhuac", dist: "8 min", icon: "🛒" },
+    { lugar: "Tiendas 3B / Neto Capulhuac", dist: "6 min", icon: "🏪" },
+    { lugar: "Centro de Capulhuac", dist: "6 min", icon: "🏘️" },
+    { lugar: "Plaza San Ángel (Tianguistenco)", dist: "10 min", icon: "🛍️" },
+    { lugar: "Plaza Mia (Tianguistenco)", dist: "10 min", icon: "🛍️" },
     { lugar: "Hospital IMSS", dist: "10 min", icon: "🏥" },
 ]
 
