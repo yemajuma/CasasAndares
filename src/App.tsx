@@ -56,7 +56,7 @@ const C = {
 
 // ─── IMÁGENES ────────────────────────────────────────────────────────────────
 const IMG = {
-    hero: "https://i.postimg.cc/GpfjNDmN/Chat-GPT-Image-16-sept-2026-12-47-12-p-m.png",
+    hero: "https://i.postimg.cc/tJ3psvtY/888CD581-5B3F-4B16-BFC5-81F24D152A13-1-201-a.jpg",
     casaA: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
     casaB: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
     sala: "https://i.postimg.cc/9M34Qt95/Sala-Comedor.jpg",
@@ -66,8 +66,8 @@ const IMG = {
     croquis: "https://i.postimg.cc/kGnqSns9/CD3529A8-7069-4F8B-ADFA-539A7BC98BE1-1-201-a.jpg",
     fachada: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
     comedor:"https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
-    terraza:"https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
-    cochera: "https://i.postimg.cc/y8sCsJxQ/COCHERA.jpg",
+    terraza:"https://i.postimg.cc/mg8Z3qxF/C04C92E5-523C-42E2-A4C9-22B062B2ED09.jpg",
+    cochera: "https://i.postimg.cc/6pY6VSs4/4CDB66F0-2DC6-4170-AA57-65EC07FF8004-1-201-a.jpg",
     // 👇 AGREGAR IMÁGENES DE TERRENOS 👇
     terreno1: "https://i.postimg.cc/kgt3B6CL/OCOYOACAC-AEREA.png",  // Cambia por tu imagen
     terreno2: "https://i.postimg.cc/RF4jsgHy/Capulhuac-AEREA.jpg",
@@ -1118,7 +1118,7 @@ function Casas() {
                                 <Pill>{PROYECTO.plantas}</Pill>
                                 <Pill>3 recámaras</Pill>
                                 <Pill>2.5 baños</Pill>
-                                <Pill>1 cajón</Pill>
+                                <Pill>2 cajones de estacionamiento </Pill>
                             </div>
                             <BtnGold onClick={scrollToGaleria} full>
                                 📸 Ver espacios disponibles
@@ -1203,7 +1203,7 @@ function Casas() {
                                     2.5 baños
                                 </Pill>
                                 <Pill bg={C.greenL} color={C.green}>
-                                    1 cajón
+                                    2 cajones de estacionamiento 
                                 </Pill>
                             </div>
                             <BtnGold
@@ -1496,12 +1496,12 @@ function DistribucionGaleria() {
                             { icon: "💧", text: "Tinaco de 1,100 litros" },
                             {
                                 icon: "⛽",
-                                text: "Tanque estacionario de gas 300 litros",
+                                text: "Tanque estacionario de gas",
                             },
-                            { icon: "🔥", text: "Calentador de piso" },
+                            { icon: "🔥", text: "Calentador de paso" },
                             {
                                 icon: "☀️",
-                                text: "Calentador solar (3 servicios)",
+                                text: "Calentador solar",
                             },
                         ].map((item) => (
                             <div
