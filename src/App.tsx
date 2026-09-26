@@ -1,830 +1,3107 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="El Fox Manor - Salón de eventos privado y exclusivo. Bodas, XV años y eventos corporativos con atención al detalle.">
-    <title>El Fox Manor | Salón de Eventos Privado</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; }
-        :root {
-            --dutch-white:#F9F6F0; --ecru:#C8B88A; --lion-gold:#C19F5F;
-            --delft-blue:#1E4C7A; --dark-gold:#A88B4F; --sec-blue:#2D5A87;
-            --primary-light:#E8DCC0; --sec-dark:#0F2642;
-            --text:#2c3e50; --text-light:#64748b; --white:#ffffff;
-            --shadow:0 8px 24px rgba(30,76,122,.12);
-            --shadow-lg:0 20px 40px rgba(30,76,122,.16);
-            --shadow-gold:0 8px 24px rgba(193,159,95,.15);
-            --tr:all 0.4s cubic-bezier(.4,0,.2,1);
-            --radius:16px;
-        }
-        body { font-family:'Poppins',sans-serif; color:var(--text); line-height:1.7; background:#fff; overflow-x:hidden; }
-        h1,h2,h3,h4,.section-title { font-family:'Georgia','Times New Roman',serif; font-weight:700; letter-spacing:-.5px; line-height:1.2; }
-        .container { max-width:1200px; margin:0 auto; padding:0 24px; }
-        section { padding:100px 0; position:relative; }
-        .btn { display:inline-block; padding:16px 36px; border-radius:50px; text-decoration:none; font-weight:600; transition:var(--tr); cursor:pointer; border:none; font-size:15px; font-family:'Poppins',sans-serif; position:relative; overflow:hidden; }
-        .btn-primary { background:linear-gradient(135deg,var(--lion-gold),var(--dark-gold)); color:#fff; box-shadow:var(--shadow-gold); }
-        .btn-primary:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(193,159,95,.3); }
-        .btn-outline { background:transparent; border:2px solid var(--lion-gold); color:var(--lion-gold); }
-        .btn-outline:hover { background:var(--lion-gold); color:#fff; transform:translateY(-3px); }
-        .section-title { text-align:center; font-size:48px; color:var(--delft-blue); margin-bottom:16px; position:relative; display:inline-block; width:100%; }
-        .section-title::after { content:''; position:absolute; bottom:-12px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,transparent,var(--lion-gold),transparent); }
-        .section-subtitle { text-align:center; color:var(--text-light); margin-bottom:56px; font-size:18px; max-width:650px; margin-left:auto; margin-right:auto; }
+import React, { useState } from "react"
 
-        /* NAVBAR */
-        .navbar { background:rgba(30,76,122,.97); backdrop-filter:blur(12px); position:fixed; width:100%; top:0; z-index:1000; padding:16px 0; transition:var(--tr); }
-        .navbar.scrolled { padding:10px 0; box-shadow:var(--shadow); }
-        .navbar .container { display:flex; justify-content:space-between; align-items:center; }
-        .logo img { height:60px; width:auto; transition:var(--tr); }
-        .logo img:hover { transform:scale(1.03); }
-        .nav-links { display:flex; gap:28px; list-style:none; align-items:center; }
-        .nav-links a { text-decoration:none; color:var(--lion-gold); font-weight:600; font-size:14px; position:relative; padding:8px 0; transition:var(--tr); }
-        .nav-links a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--lion-gold); transition:width .3s; }
-        .nav-links a:hover::after { width:100%; }
-        .menu-toggle { display:none; font-size:28px; cursor:pointer; color:var(--lion-gold); }
+// ─── CONFIGURACIÓN ─────────────────────────────────────────────────────────
+// ─── CONFIGURACIÓN DE WHATSAPP ────────────────────────────────────────────────
+const WA_NUM = "5217224047668"
 
-        /* HERO */
-        .hero { background:linear-gradient(135deg,rgba(30,76,122,.88) 0%,rgba(30,76,122,.70) 50%,rgba(193,159,95,.50) 100%),url('https://i.postimg.cc/SxdY5RLR/PORTADA1.jpg'); background-size:cover; background-position:center; background-attachment:fixed; color:#fff; padding:240px 0 180px; text-align:center; position:relative; min-height:92vh; display:flex; align-items:center; overflow:hidden; }
-        .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at center,transparent 0%,rgba(30,76,122,.3) 100%); pointer-events:none; }
-        .hero::after { content:''; position:absolute; bottom:-2px; left:0; right:0; height:100px; background:linear-gradient(to bottom,transparent,#fff); }
-        .hero .container { position:relative; z-index:1; width:100%; }
-        .hero h1 { font-size:72px; margin-bottom:28px; text-shadow:0 4px 12px rgba(0,0,0,.3); letter-spacing:-2px; animation:fadeInUp 1s ease; }
-        .hero h1 .highlight { color:var(--lion-gold); }
-        .hero p { font-size:22px; margin-bottom:48px; max-width:750px; margin-left:auto; margin-right:auto; text-shadow:0 2px 8px rgba(0,0,0,.2); animation:fadeInUp 1s ease .2s backwards; }
-        .hero-btns { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; animation:fadeInUp 1s ease .4s backwards; }
-        @keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+// Mensajes según la intención
+const WA_MSG_COMPRAR = encodeURIComponent(
+    "Hola, estoy interesado en COMPRAR una casa en Casas Andares. ¿Me pueden dar más información sobre precios y disponibilidad?"
+)
 
-        /* AMENIDADES */
-        #amenidades { background:#fff; }
-        .amenidades-intro { text-align:center; max-width:800px; margin:0 auto 60px; padding:32px; background:linear-gradient(135deg,var(--dutch-white),rgba(200,184,138,.1)); border-radius:var(--radius); border:2px solid var(--primary-light); }
-        .amenidades-intro h3 { font-size:28px; color:var(--delft-blue); margin-bottom:16px; }
-        .amenidades-intro p { font-size:17px; line-height:1.8; }
-        .features-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; margin-top:40px; }
-        .feature-card { text-align:center; padding:42px 32px; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); transition:var(--tr); border:2px solid transparent; position:relative; overflow:hidden; }
-        .feature-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--lion-gold),var(--dark-gold)); transform:scaleX(0); transition:transform .4s; }
-        .feature-card:hover::before { transform:scaleX(1); }
-        .feature-card:hover { transform:translateY(-12px); box-shadow:var(--shadow-lg); border-color:var(--primary-light); }
-        .feature-icon { font-size:56px; margin-bottom:24px; display:inline-block; transition:var(--tr); }
-        .feature-card:hover .feature-icon { transform:scale(1.15) rotate(5deg); }
-        .feature-card h3 { font-size:22px; margin-bottom:16px; color:var(--delft-blue); }
-        .feature-card p { color:var(--text-light); font-size:15px; }
+const WA_MSG_RENTAR = encodeURIComponent(
+    "Hola, estoy interesado en RENTAR una casa en Casas Andares. ¿Me pueden dar más información sobre requisitos y disponibilidad?"
+)
 
-        /* PAQUETES */
-        #paquetes { background:linear-gradient(to bottom,var(--dutch-white),#fff); }
-        .paquetes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:36px; margin-top:48px; }
-        .paquete-card { background:#fff; border-radius:var(--radius); box-shadow:var(--shadow-lg); transition:var(--tr); border:3px solid transparent; overflow:hidden; position:relative; }
-        .paquete-card:hover { transform:translateY(-12px); box-shadow:0 24px 48px rgba(30,76,122,.2); border-color:var(--lion-gold); }
-        .paquete-header { background:linear-gradient(135deg,var(--delft-blue),var(--sec-blue)); color:#fff; padding:32px 28px; text-align:center; position:relative; overflow:hidden; }
-        .paquete-card.destacado .paquete-header { background:linear-gradient(135deg,var(--lion-gold),var(--dark-gold)); }
-        .paquete-nombre { font-size:32px; margin-bottom:8px; position:relative; z-index:1; }
-        .paquete-precio { font-size:48px; font-weight:700; letter-spacing:-1px; position:relative; z-index:1; }
-        .paquete-precio small { font-size:16px; opacity:.9; display:block; margin-top:4px; }
-        .paquete-body { padding:36px 28px; }
-        .paquete-incluye { list-style:none; margin-bottom:28px; }
-        .paquete-incluye li { padding:14px 0; border-bottom:1px solid var(--dutch-white); display:flex; align-items:flex-start; gap:12px; font-size:15px; }
-        .paquete-incluye li:last-child { border-bottom:none; }
-        .paquete-incluye li::before { content:'✓'; color:var(--lion-gold); font-weight:700; font-size:18px; flex-shrink:0; }
-        .badge { position:absolute; top:20px; right:-35px; background:var(--lion-gold); color:#fff; padding:8px 45px; font-size:13px; font-weight:700; transform:rotate(45deg); z-index:2; }
+const WA_MSG_CITA = encodeURIComponent(
+    "Hola, me gustaría AGENDAR UNA VISITA para conocer las Casas Andares en Capulhuac. ¿Cuándo podrían atenderme?"
+)
 
-        /* MENÚ */
-        #menu { background:#fff; }
-        .menu-intro { text-align:center; max-width:750px; margin:0 auto 56px; background:var(--dutch-white); padding:32px; border-radius:var(--radius); border:2px solid var(--primary-light); }
-        .menu-intro p { font-size:16px; line-height:1.8; }
-        .menu-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:28px; max-width:1100px; margin:0 auto; }
-        .menu-item { background:#fff; border-radius:var(--radius); padding:32px 28px; box-shadow:var(--shadow); transition:var(--tr); border:2px solid transparent; text-align:center; }
-        .menu-item:hover { transform:translateY(-8px); box-shadow:var(--shadow-lg); border-color:var(--lion-gold); }
-        .menu-item.consultar { border:2px dashed var(--primary-light); background:var(--dutch-white); }
-        .menu-icon { font-size:52px; margin-bottom:16px; display:block; }
-        .menu-item h4 { font-size:22px; color:var(--delft-blue); margin-bottom:12px; }
-        .menu-precio { font-size:32px; font-weight:700; color:var(--lion-gold); margin-bottom:8px; }
-        .menu-precio small { font-size:14px; color:var(--text-light); display:block; font-weight:400; }
-        .menu-precio.consultar-txt { font-size:20px; color:var(--sec-blue); }
-        .menu-nota { background:linear-gradient(135deg,rgba(193,159,95,.1),rgba(193,159,95,.05)); padding:24px; border-radius:12px; margin-top:48px; text-align:center; border:2px solid var(--primary-light); }
-        .menu-nota p { font-size:15px; line-height:1.7; margin:0; }
+const WA_MSG_GENERAL = encodeURIComponent(
+    "Hola, me interesa una casa en Casas Andares. ¿Me pueden dar más información?"
+)
+const WA_MSG_TERRENO = encodeURIComponent(
+    "Hola, estoy interesado en COMPRAR UN TERRENO en Capulhuac. ¿Me pueden dar más información sobre precios y disponibilidad?"
+)
 
-        /* COTIZADOR */
-        .cotizador-section { background:linear-gradient(135deg,rgba(249,246,240,.95),rgba(200,184,138,.2)); }
-        .cotizador-card { max-width:800px; margin:0 auto; background:#fff; border-radius:28px; padding:52px 48px; box-shadow:var(--shadow-lg); border:1px solid rgba(193,159,95,.2); }
-        .cotizador-card h3 { font-size:38px; color:var(--delft-blue); margin-bottom:16px; text-align:center; }
-        .aviso-precio { background:linear-gradient(135deg,rgba(30,76,122,.1),rgba(30,76,122,.05)); padding:16px 24px; border-radius:12px; text-align:center; margin-bottom:36px; border-left:4px solid var(--delft-blue); }
-        .aviso-precio p { margin:0; color:var(--delft-blue); font-weight:600; font-size:15px; }
-        .campo { margin-bottom:32px; }
-        .campo label { display:block; font-weight:600; color:var(--delft-blue); margin-bottom:16px; font-size:17px; }
-        .opciones-grid { display:flex; flex-direction:column; gap:14px; }
-        .opcion-radio { display:flex; align-items:center; justify-content:space-between; padding:20px 24px; background:var(--dutch-white); border-radius:14px; cursor:pointer; border:2px solid transparent; transition:var(--tr); }
-        .opcion-radio:hover { border-color:var(--primary-light); background:rgba(193,159,95,.08); }
-        .opcion-radio.selected { border-color:var(--lion-gold); background:linear-gradient(135deg,rgba(193,159,95,.15),rgba(193,159,95,.08)); box-shadow:0 4px 12px rgba(193,159,95,.2); }
-        .opcion-radio input { accent-color:var(--lion-gold); margin-right:16px; width:20px; height:20px; cursor:pointer; }
-        .opcion-precio { font-weight:700; color:var(--lion-gold); font-size:17px; }
-        input[type="number"] { width:100%; padding:18px 20px; border:2px solid #e5e7eb; border-radius:14px; font-size:17px; font-family:'Poppins',sans-serif; transition:var(--tr); color:var(--text); }
-        input[type="number"]:focus { border-color:var(--lion-gold); outline:none; box-shadow:0 0 0 4px rgba(193,159,95,.15); }
-        .total-box { background:linear-gradient(135deg,var(--delft-blue),var(--sec-blue)); color:#fff; padding:36px; border-radius:20px; text-align:center; margin:36px 0; box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
-        .total-box::before { content:''; position:absolute; top:-50%; right:-50%; width:200%; height:200%; background:radial-gradient(circle,rgba(193,159,95,.1) 0%,transparent 70%); animation:rotate 20s linear infinite; }
-        @keyframes rotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        .total-box .monto { font-size:48px; font-weight:700; letter-spacing:-1px; position:relative; z-index:1; text-shadow:0 2px 8px rgba(0,0,0,.2); }
+// Links según la intención
+const WA_LINK_COMPRAR = `https://wa.me/${WA_NUM}?text=${WA_MSG_COMPRAR}`
+const WA_LINK_RENTAR = `https://wa.me/${WA_NUM}?text=${WA_MSG_RENTAR}`
+const WA_LINK_CITA = `https://wa.me/${WA_NUM}?text=${WA_MSG_CITA}`
+const WA_LINK_GENERAL = `https://wa.me/${WA_NUM}?text=${WA_MSG_GENERAL}`
+const WA_LINK_TERRENO = `https://wa.me/${WA_NUM}?text=${WA_MSG_TERRENO}`
 
-        /* GALERÍA */
-        .gallery { background:linear-gradient(to bottom,#fff,var(--dutch-white)); }
-        .gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:28px; }
-        .gallery-item { position:relative; border-radius:var(--radius); overflow:hidden; cursor:pointer; aspect-ratio:4/3; box-shadow:var(--shadow); transition:var(--tr); }
-        .gallery-item::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(193,159,95,.7),rgba(30,76,122,.7)); opacity:0; transition:var(--tr); z-index:1; }
-        .gallery-item:hover::before { opacity:1; }
-        .gallery-item::after { content:'🔍 Ver imagen'; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); color:#fff; font-weight:600; font-size:18px; opacity:0; transition:var(--tr); z-index:2; }
-        .gallery-item:hover::after { opacity:1; }
-        .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.25,.46,.45,.94); }
-        .gallery-item:hover img { transform:scale(1.12); }
-        .gallery-item:hover { box-shadow:var(--shadow-lg); }
 
-        /* CALENDARIOS */
-        .calendarios-section { background:#fff; }
-        .calendarios-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(400px,1fr)); gap:48px; margin-top:48px; }
-        .calendario-card { background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-lg); border:2px solid var(--primary-light); }
-        .calendario-header { background:linear-gradient(135deg,var(--delft-blue),var(--sec-blue)); color:#fff; padding:24px; text-align:center; }
-        .calendario-header h3 { font-size:24px; margin-bottom:8px; }
-        .calendario-header p { font-size:14px; opacity:.9; margin:0; }
-        .calendario-wrapper iframe { width:100%; height:500px; border:0; display:block; }
-        .calendario-actions { padding:24px; text-align:center; background:var(--dutch-white); }
+// ─── COLORES ────────────────────────────────────────────────────────────────
+const C = {
+    navy: "#0B3D6B",
+    navyD: "#071e38",
+    navyM: "#1560a0",
+    navyL: "#e8f1fb",
+    gold: "#b8952a",
+    goldL: "#faf3e0",
+    green: "#1a8f68",
+    greenL: "#e6f5ef",
+    white: "#ffffff",
+    off: "#f8f9fb",
+    border: "#dde6f0",
+    text: "#18283a",
+    muted: "#607080",
+    dark: "#050f1a",
+    terracota: "#c46b3f",
+    terracotaL: "#fdf5f0",
+    sunset: "#e8934f",
+    sunsetL: "#fef7e8",
+}
 
-        /* TESTIMONIOS */
-        #testimonios { background:linear-gradient(to bottom,var(--dutch-white),#fff); }
-        .testimonials-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:36px; }
-        .testimonial-card { background:#fff; padding:38px 34px; border-radius:var(--radius); box-shadow:var(--shadow); transition:var(--tr); border:2px solid transparent; position:relative; }
-        .testimonial-card::before { content:'"'; position:absolute; top:-10px; left:20px; font-size:80px; color:var(--lion-gold); opacity:.2; font-family:Georgia,serif; line-height:1; }
-        .testimonial-card:hover { transform:translateY(-8px); box-shadow:var(--shadow-lg); border-color:var(--primary-light); }
-        .stars { color:var(--lion-gold); letter-spacing:3px; margin-bottom:20px; font-size:20px; }
+// ─── IMÁGENES ────────────────────────────────────────────────────────────────
+const IMG = {
+    hero: "https://i.postimg.cc/tJ3psvtY/888CD581-5B3F-4B16-BFC5-81F24D152A13-1-201-a.jpg",
+    casaA: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
+    casaB: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
+    sala: "https://i.postimg.cc/9M34Qt95/Sala-Comedor.jpg",
+    cocina: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80",
+    recamara: "https://i.postimg.cc/prCyCw6W/RECAMARA-PRINCIPAL.jpg",
+    jardin: "https://i.postimg.cc/wBNvZyGG/jardi-n.jpg",
+    croquis: "https://i.postimg.cc/kGnqSns9/CD3529A8-7069-4F8B-ADFA-539A7BC98BE1-1-201-a.jpg",
+    fachada: "https://i.postimg.cc/cL3n40Pc/9C3504C3-CCFC-4257-8618-48F9B22FB8BA-1-201-a.jpg",
+    comedor:"https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&q=80",
+    terraza:"https://i.postimg.cc/mg8Z3qxF/C04C92E5-523C-42E2-A4C9-22B062B2ED09.jpg",
+    cochera: "https://i.postimg.cc/6pY6VSs4/4CDB66F0-2DC6-4170-AA57-65EC07FF8004-1-201-a.jpg",
+    // 👇 AGREGAR IMÁGENES DE TERRENOS 👇
+    terreno1: "https://i.postimg.cc/kgt3B6CL/OCOYOACAC-AEREA.png",  // Cambia por tu imagen
+    terreno2: "https://i.postimg.cc/RF4jsgHy/Capulhuac-AEREA.jpg",
+    terreno3: "https://i.postimg.cc/N07nHRz4/Xometitla-AEREA.jpg",
+    terreno4: "https://i.postimg.cc/m275RfmC/ALMAYA-AEREA.jpg",
+}
 
-        /* FAQ */
-        #faq { background:#fff; }
-        .faq-grid { max-width:850px; margin:0 auto; }
-        .faq-item { background:#fff; border-radius:14px; margin-bottom:16px; box-shadow:var(--shadow); border:2px solid var(--dutch-white); transition:var(--tr); }
-        .faq-item:hover { border-color:var(--primary-light); }
-        .faq-item.active { border-color:var(--lion-gold); box-shadow:var(--shadow-lg); }
-        .faq-question { padding:24px 30px; font-weight:600; cursor:pointer; display:flex; justify-content:space-between; align-items:center; font-size:17px; color:var(--delft-blue); transition:var(--tr); font-family:Georgia,serif; }
-        .faq-question:hover { color:var(--lion-gold); }
-        .faq-question span { transition:var(--tr); color:var(--lion-gold); }
-        .faq-item.active .faq-question span { transform:rotate(180deg); }
-        .faq-answer { padding:0 30px 28px; display:none; color:var(--text-light); line-height:1.8; }
-        .faq-item.active .faq-answer { display:block; }
+// ─── DATOS DEL PROYECTO ─────────────────────────────────────────────────────
+const PROYECTO = {
+    nombre: "Tu nuevo hogar",
+    tagline: "Tu hogar en un entorno privado y seguro",
+    desc: "Casas Andares es un desarrollo exclusivo en Xometitla, Capulhuac, Estado de México, con 10 casas de dos plantas en un complejo cerrado con vigilancia 24/7. Cada casa cuenta con 99 m² de predio y 139 m² de construcción, diseñada para familias que buscan comodidad, seguridad y calidad de vida.",
+    venta: "Consultar precio", // revisar bien el precio en la proxima reunion
+    renta: "$9,000 / mes",
+    predio: "99 m²",
+    construccion: "139 m²",
+    plantas: "2 plantas",
+    casasTotales: "10 casas",
+    casasVenta: "3 casas en venta",
+    casasRenta: "7 casas en renta",
+}
 
-        /* CONTACTO */
-        #contacto { background:linear-gradient(to bottom,var(--dutch-white),#fff); }
-        .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:48px; }
-        .contact-info { background:#fff; padding:42px; border-radius:var(--radius); box-shadow:var(--shadow); border:2px solid var(--primary-light); }
-        .contact-info h3 { color:var(--delft-blue); margin-bottom:14px; font-size:22px; display:flex; align-items:center; gap:10px; }
-        .contact-info p { margin-bottom:24px; color:var(--text-light); line-height:1.7; }
-        .mapa { border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-lg); height:100%; min-height:400px; border:2px solid var(--primary-light); }
-        .mapa iframe { width:100%; height:100%; min-height:400px; border:0; }
+const PLANTA_BAJA = [
+    "Sala – comedor amplio",
+    "Cocina integral con campana extractora, parrilla y tarja",
+    "Medio baño de visitas",
+    "Estacionamiento techado (2 cajones)",
+    "Jardín privado",
+    "Escaleras con domo de iluminación natural",
+    "Área de lavado",
+]
 
-        /* FOOTER */
-        .footer { background:linear-gradient(135deg,var(--delft-blue),var(--sec-dark)); color:#fff; padding:64px 0 32px; position:relative; }
-        .footer::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,transparent,var(--lion-gold),transparent); }
-        .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:48px; margin-bottom:48px; }
-        .footer h3,.footer h4 { color:var(--lion-gold); margin-bottom:20px; }
-        .footer a { color:#cbd5e0; text-decoration:none; transition:var(--tr); display:inline-block; }
-        .footer a:hover { color:var(--lion-gold); transform:translateX(4px); }
-        .footer-bottom { text-align:center; padding-top:32px; border-top:1px solid rgba(255,255,255,.1); font-size:14px; color:#94a3b8; }
+const PLANTA_ALTA = [
+    "Recámara principal con baño completo, vestidor, clóset y balcón con barandal",
+    "2 recámaras adicionales con clóset",
+    "Baño completo compartido (segundo baño)",
+]
 
-        /* WHATSAPP */
-        .whatsapp-float { position:fixed; bottom:32px; right:32px; background:#25D366; color:#fff; width:65px; height:65px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:36px; box-shadow:0 8px 24px rgba(37,211,102,.4); transition:var(--tr); z-index:999; text-decoration:none; animation:pulse 2s infinite; }
-        @keyframes pulse { 0%,100%{box-shadow:0 8px 24px rgba(37,211,102,.4)} 50%{box-shadow:0 8px 32px rgba(37,211,102,.6)} }
-        .whatsapp-float:hover { transform:scale(1.15); background:#128C7E; animation:none; }
+const INSTALACIONES = [
+    "Tinaco de 1,100 litros",
+    "Tanque estacionario de gas 300 litros",
+    "Calentador de paso",
+    "Calentador solar (3 servicios)",
+]
 
-        /* MODAL */
-        .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.95); z-index:2000; justify-content:center; align-items:center; cursor:pointer; backdrop-filter:blur(8px); }
-        .modal img { max-width:92%; max-height:92%; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.5); animation:zoomIn .3s ease; }
-        @keyframes zoomIn { from{opacity:0;transform:scale(.8)} to{opacity:1;transform:scale(1)} }
+const AMENIDADES = [
+    {
+        icon: "🛡️",
+        titulo: "Acceso Controlado",
+        desc: "Portón eléctrico y puerta peatonal con control remoto en el único acceso.",
+    },
+    {
+        icon: "⚽",
+        titulo: "Cancha de Fútbol Rápido",
+        desc: "Cancha de uso exclusivo para residentes y sus familias.",
+    },
+    {
+        icon: "🏋️",
+        titulo: "Gimnasio",
+        desc: "Espacio de ejercicio y acondicionamiento para residentes.",
+    },
+    {
+        icon: "🏢",
+        titulo: "Oficina de Administración",
+        desc: "Atención a residentes y gestión del fraccionamiento.",
+    },
+    {
+        icon: "🛒",
+        titulo: "Servicios Cercanos",
+        desc: "Farmacia, tienda y servicios básicos.",
+    },
+]
 
-        /* RESPONSIVE */
-        @media(max-width:768px) {
-            .menu-toggle { display:block; }
-            .nav-links { display:none; position:absolute; top:80px; left:0; width:100%; background:#fff; flex-direction:column; padding:32px 24px; box-shadow:var(--shadow-lg); gap:20px; border-top:2px solid var(--lion-gold); }
-            .nav-links.active { display:flex; }
-            .nav-links a { color:var(--delft-blue); }
-            .hero h1 { font-size:42px; letter-spacing:-1px; }
-            .hero { padding:160px 0 120px; min-height:75vh; background-attachment:scroll; }
-            .hero p { font-size:18px; }
-            .section-title { font-size:36px; }
-            .cotizador-card { padding:36px 28px; }
-            .total-box .monto { font-size:36px; }
-            section { padding:70px 0; }
-            .features-grid,.paquetes-grid,.menu-grid,.gallery-grid,.testimonials-grid,.contact-grid { grid-template-columns:1fr; }
-            .calendarios-grid { grid-template-columns:1fr; }
-        }
-        @media(max-width:480px) {
-            .hero h1 { font-size:32px; }
-            .hero p { font-size:16px; }
-            .hero-btns { flex-direction:column; }
-            .btn { width:100%; text-align:center; }
-        }
-    </style>
-</head>
-<body>
+const DISTANCIAS = [
+    { lugar: "Chedraui Capulhuac", dist: "8 min", icon: "🛒" },
+    { lugar: "Tiendas 3B / Neto Capulhuac", dist: "6 min", icon: "🏪" },
+    { lugar: "Centro de Capulhuac", dist: "6 min", icon: "🏘️" },
+    { lugar: "Plaza San Ángel (Tianguistenco)", dist: "10 min", icon: "🛍️" },
+    { lugar: "Plaza Mia (Tianguistenco)", dist: "10 min", icon: "🛍️" },
+    { lugar: "Hospital IMSS", dist: "10 min", icon: "🏥" },
+]
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-    <div class="container">
-        <a href="#" class="logo"><img src="https://i.postimg.cc/SxdY5RLK/LOGO.png" alt="El Fox Manor"></a>
-        <div class="menu-toggle" id="menuToggle">☰</div>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#paquetes">Paquetes</a></li>
-            <li><a href="#menu">Menú</a></li>
-            <li><a href="#cotizador">Cotizar</a></li>
-            <li><a href="#galeria">Galería</a></li>
-            <li><a href="#calendarios">Disponibilidad</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-        </ul>
-    </div>
-</nav>
+const GALERIA_FOTOS = [
+    {
+        src: IMG.sala,
+        titulo: "Sala principal",
+        desc: "Amplia sala con iluminación natural",
+    },
+    {
+        src: IMG.cocina,
+        titulo: "Cocina integral",
+        desc: "Equipada con campana, parrilla y tarja",
+    },
+    {
+        src: IMG.recamara,
+        titulo: "Recámara principal",
+        desc: "Con vestidor y baño completo",
+    },
+    {
+        src: IMG.jardin,
+        titulo: "Jardín privado",
+        desc: "Espacio verde para disfrutar en familia",
+    },
+    {
+        src: IMG.fachada,
+        titulo: "Fachada moderna",
+        desc: "Diseño contemporáneo y elegante",
+    },
+    {
+        src: IMG.terraza,
+        titulo: "Terraza y balcón",
+        desc: "Vistas agradables y ventilación natural",
+    },
+]
 
-<!-- HERO -->
-<section id="inicio" class="hero">
-    <div class="container">
-        <h1>Tu evento, <span class="highlight">nuestro compromiso</span></h1>
-        <p>Un salón completamente privado donde cada detalle cuenta. Seguridad, elegancia y atención personalizada para hacer de tu celebración una experiencia inolvidable.</p>
-        <div class="hero-btns">
-            <a href="#cotizador" class="btn btn-primary">Cotizar mi evento</a>
-            <a href="#calendarios" class="btn btn-outline">Agendar visita</a>
+// ─── COMPONENTES REUTILIZABLES ─────────────────────────────────────────────
+function tag(txt: string, bg = C.goldL, color = C.gold) {
+    return (
+        <span
+            style={{
+                display: "inline-block",
+                background: bg,
+                color,
+                fontSize: 11,
+                fontWeight: 700,
+                padding: "4px 14px",
+                borderRadius: 20,
+                letterSpacing: "0.07em",
+            }}
+        >
+            {txt}
+        </span>
+    )
+}
+
+function SectionTitle({
+    badge,
+    badgeBg = C.goldL,
+    badgeColor = C.gold,
+    title,
+    sub = "",
+    light = false,
+    center = false,
+}) {
+    return (
+        <div
+            style={{ marginBottom: 52, textAlign: center ? "center" : "left" }}
+        >
+            {tag(
+                badge,
+                light ? "rgba(255,255,255,.12)" : badgeBg,
+                light ? "#fff" : badgeColor
+            )}
+            <h2
+                style={{
+                    fontSize: "clamp(28px, 5vw, 38px)",
+                    fontWeight: 800,
+                    lineHeight: 1.15,
+                    color: light ? "#fff" : C.navy,
+                    margin: "14px 0 12px",
+                }}
+            >
+                {title}
+            </h2>
+            {sub && (
+                <p
+                    style={{
+                        fontSize: "clamp(14px, 4vw, 17px)",
+                        color: light ? "rgba(255,255,255,.65)" : C.muted,
+                        maxWidth: 560,
+                        margin: center ? "0 auto" : "0",
+                        lineHeight: 1.75,
+                    }}
+                >
+                    {sub}
+                </p>
+            )}
         </div>
-    </div>
-</section>
+    )
+}
 
-<!-- AMENIDADES -->
-<section id="amenidades" data-aos="fade-up">
-    <div class="container">
-        <div class="amenidades-intro" data-aos="zoom-in">
-            <h3>Cuidamos cada detalle para que tu evento sea una experiencia inolvidable</h3>
-            <p><strong>El Fox Manor</strong> es tu salón completamente privado. No compartimos el espacio con otros eventos. Todo el lugar es exclusivamente tuyo, incluyendo estacionamiento amplio y seguro para tus invitados.</p>
-        </div>
-        <h2 class="section-title" data-aos="fade-up">Lo que hace especial a El Fox Manor</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Un espacio nuevo, moderno y diseñado pensando en ti</p>
-        <div class="features-grid">
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-icon">🔒</div>
-                <h3>100% Privado</h3>
-                <p>El salón se renta únicamente a ti. Sin eventos simultáneos, sin compartir espacios. Todo es exclusivo para tu celebración.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon">🚗</div>
-                <h3>Estacionamiento Amplio</h3>
-                <p>40 espacios seguros. Olvídate del estrés del estacionamiento, tus invitados llegarán cómodos y tranquilos.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-icon">🌳</div>
-                <h3>Jardín Privado</h3>
-                <p>Amplio espacio verde ideal para ceremonias al aire libre o coctel de bienvenida. Perfecto para fotos memorables.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-icon">🎭</div>
-                <h3>Sala para Anfitriones</h3>
-                <p>Espacio privado con comedor, tarja y refrigerador. Para que los anfitriones descansen, se cambien o tengan privacidad.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon">🚻</div>
-                <h3>Dos Áreas de Baños</h3>
-                <p>Baños amplios con limpieza constante durante tu evento para garantizar comodidad en todo momento.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-icon">📹</div>
-                <h3>Vigilancia 24/7</h3>
-                <p>Cámaras de seguridad en áreas comunes y entrada. Tu evento y tus invitados estarán seguros en todo momento.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-icon">❄️</div>
-                <h3>Clima Controlado</h3>
-                <p>Salón techado con aire acondicionado. Comodidad garantizada sin importar la temporada del año.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon">🎵</div>
-                <h3>Audio y Pantallas</h3>
-                <p>Sistema de audio profesional y televisiones. Ideal para presentaciones, videos o música en vivo.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-icon">👨‍🍳</div>
-                <h3>Cocina Industrial</h3>
-                <p>Equipada para preparar alimentos al momento. Garantizamos platillos frescos y calientes para tus invitados.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="feature-icon">🏠</div>
-                <h3>Salón Nuevo</h3>
-                <p>Instalaciones modernas y bien cuidadas. No tenemos años de desgaste, todo está en excelentes condiciones.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="feature-icon">👥</div>
-                <h3>Capacidad hasta 200 personas</h3>
-                <p>Espacio amplio y cómodo. Tus invitados podrán moverse libremente sin sentirse apretados.</p>
-            </div>
-            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="feature-icon">🤝</div>
-                <h3>Atención Personalizada</h3>
-                <p>¿Necesitas mariachi? ¿Un color específico de mantel? Lo conseguimos. Nos adaptamos a tus necesidades.</p>
-            </div>
-        </div>
-    </div>
-</section>
+function Pill({ children, bg = C.navyL, color = C.navy }) {
+    return (
+        <span
+            style={{
+                display: "inline-block",
+                background: bg,
+                color,
+                fontSize: 11,
+                fontWeight: 700,
+                padding: "3px 12px",
+                borderRadius: 20,
+                marginRight: 6,
+                marginBottom: 6,
+            }}
+        >
+            {children}
+        </span>
+    )
+}
 
-<!-- PAQUETES -->
-<section id="paquetes">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Nuestros Paquetes</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Elige el que mejor se adapte a tu evento. Todos incluyen 12 horas de renta.</p>
-        <div class="paquetes-grid">
-            <!-- PLATA -->
-            <div class="paquete-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="paquete-header">
-                    <div class="paquete-nombre">Plata</div>
-                    <div class="paquete-precio">$120<small>por persona</small></div>
-                </div>
-                <div class="paquete-body">
-                    <ul class="paquete-incluye">
-                        <li>12 horas de renta del salón</li>
-                        <li>Mesas redondas para 10 personas</li>
-                        <li>Mantel blanco + cubremantel</li>
-                        <li>Sillas acolchonadas con cubresillas</li>
-                        <li>Cocina: parrilla 3 quemadores + microondas (solo recalentar)</li>
-                        <li>Limpieza de baños durante el evento</li>
-                        <li>Estacionamiento con costo adicional</li>
-                        <li>2 espacios reservados para anfitriones</li>
-                    </ul>
-                    <p style="text-align:center;color:var(--text-light);font-size:14px;margin-top:16px;">Capacidad máxima: 200 personas</p>
-                </div>
-            </div>
-            <!-- CENTENARIO -->
-            <div class="paquete-card destacado" data-aos="fade-up" data-aos-delay="200">
-                <div class="badge">MÁS POPULAR</div>
-                <div class="paquete-header">
-                    <div class="paquete-nombre">Centenario</div>
-                    <div class="paquete-precio">$150<small>por persona</small></div>
-                </div>
-                <div class="paquete-body">
-                    <ul class="paquete-incluye">
-                        <li><strong>Todo lo del paquete Plata, más:</strong></li>
-                        <li>Servilletas individuales de tela</li>
-                        <li>Mesa para anfitriones (mantel blanco, 2–4 sillas con cubresillas)</li>
-                        <li>Loza completa (platos: trinche, arrocero, tazón, postre)</li>
-                        <li>Cubiertos (cuchara, tenedor, cuchillo)</li>
-                        <li>Vasos de vidrio</li>
-                        <li><strong>Espacio privado para anfitriones</strong> (sala con comedor, tarja, refrigerador)</li>
-                    </ul>
-                    <p style="text-align:center;color:var(--text-light);font-size:14px;margin-top:16px;">Capacidad máxima: 200 personas</p>
-                </div>
-            </div>
-            <!-- DIAMANTE -->
-            <div class="paquete-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="paquete-header">
-                    <div class="paquete-nombre">Diamante</div>
-                    <div class="paquete-precio">$180<small>por persona</small></div>
-                </div>
-                <div class="paquete-body">
-                    <ul class="paquete-incluye">
-                        <li><strong>Todo lo del paquete Centenario, más:</strong></li>
-                        <li>20 mesas redondas con mantel de <strong>LINO</strong></li>
-                        <li>Sillas de <strong>MADERA</strong> (elegancia premium)</li>
-                        <li>Servilletas y manteles de <strong>LINO</strong></li>
-                        <li>Mesa de anfitriones con camino de mesa</li>
-                        <li>2–4 sillas de madera para anfitriones</li>
-                    </ul>
-                    <p style="text-align:center;color:var(--text-light);font-size:14px;margin-top:16px;">Capacidad máxima: 200 personas</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+function BtnGold({
+    children,
+    href = undefined,
+    onClick = undefined,
+    full = false,
+    style: s = {},
+}: any) {
+    const base: React.CSSProperties = {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: C.gold,
+        color: "#fff",
+        fontSize: 14,
+        fontWeight: 700,
+        padding: "12px 26px",
+        borderRadius: 6,
+        border: "none",
+        cursor: "pointer",
+        textDecoration: "none",
+        fontFamily: "inherit",
+        letterSpacing: ".02em",
+        transition: "opacity .15s, transform .1s",
+        width: full ? "100%" : "auto",
+        boxSizing: "border-box",
+        ...s,
+    }
+    const hov = (e: any, in_: boolean) => {
+        e.currentTarget.style.opacity = in_ ? ".85" : "1"
+        e.currentTarget.style.transform = in_ ? "translateY(-1px)" : "none"
+    }
+    if (href)
+        return (
+            <a
+                href={href}
+                target={href.startsWith("http") ? "_blank" : "_self"}
+                rel="noreferrer"
+                style={base}
+                onMouseEnter={(e) => hov(e, true)}
+                onMouseLeave={(e) => hov(e, false)}
+            >
+                {children}
+            </a>
+        )
+    return (
+        <button
+            onClick={onClick}
+            style={base}
+            onMouseEnter={(e) => hov(e, true)}
+            onMouseLeave={(e) => hov(e, false)}
+        >
+            {children}
+        </button>
+    )
+}
 
-<!-- MENÚ -->
-<section id="menu">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Experiencia Gastronómica</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Menú de 3 tiempos preparado al momento en nuestra cocina industrial</p>
-        <div class="menu-intro" data-aos="zoom-in">
-            <p><strong>Cada menú incluye:</strong> Entrada (sopa o ensalada) + Plato fuerte + Postre.<br>
-            Puedes elegir entre varios platillos dentro de cada proteína. El precio depende del plato fuerte seleccionado.</p>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-item" data-aos="fade-up" data-aos-delay="100">
-                <span class="menu-icon">🍗</span>
-                <h4>Pollo</h4>
-                <div class="menu-precio">$395<small>por persona</small></div>
-            </div>
-            <div class="menu-item" data-aos="fade-up" data-aos-delay="150">
-                <span class="menu-icon">🥩</span>
-                <h4>Cerdo</h4>
-                <div class="menu-precio">$385<small>por persona</small></div>
-            </div>
-            <div class="menu-item" data-aos="fade-up" data-aos-delay="200">
-                <span class="menu-icon">🐟</span>
-                <h4>Pescado</h4>
-                <div class="menu-precio">$385<small>por persona</small></div>
-            </div>
-            <div class="menu-item consultar" data-aos="fade-up" data-aos-delay="250">
-                <span class="menu-icon">🥩</span>
-                <h4>Res</h4>
-                <div class="menu-precio consultar-txt">Consultar precio</div>
-            </div>
-            <div class="menu-item" data-aos="fade-up" data-aos-delay="300">
-                <span class="menu-icon">🐠</span>
-                <h4>Salmón</h4>
-                <div class="menu-precio">$415<small>por persona</small></div>
-            </div>
-        </div>
-        <div class="menu-nota" data-aos="fade-up" data-aos-delay="350">
-            <p>💡 <strong>¿Tienes invitados pequeños?</strong> Ofrecemos menú especial para niños a <strong>$350 por persona</strong>. El precio se ajusta según el número de niños que asistan. ¡Consúltanos!</p>
-        </div>
-    </div>
-</section>
+function BtnOutline({
+    children,
+    onClick = undefined,
+    href = undefined,
+    light = false,
+    style: s = {},
+}: any) {
+    const base: React.CSSProperties = {
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "transparent",
+        color: light ? "#fff" : C.navy,
+        border: light
+            ? "1.5px solid rgba(255,255,255,.5)"
+            : `1.5px solid ${C.navy}`,
+        fontSize: 14,
+        fontWeight: 700,
+        padding: "11px 26px",
+        borderRadius: 6,
+        cursor: "pointer",
+        textDecoration: "none",
+        fontFamily: "inherit",
+        letterSpacing: ".02em",
+        transition: "opacity .15s",
+        ...s,
+    }
+    if (href)
+        return (
+            <a href={href} target="_blank" rel="noreferrer" style={base}>
+                {children}
+            </a>
+        )
+    return (
+        <button onClick={onClick} style={base}>
+            {children}
+        </button>
+    )
+}
 
-<!-- COTIZADOR -->
-<section id="cotizador" class="cotizador-section">
-    <div class="container">
-        <div class="cotizador-card" data-aos="zoom-in">
-            <h3>Cotiza tu evento</h3>
-            <p style="color:var(--text-light);margin-bottom:28px;text-align:center;">Selecciona tus preferencias y obtén un presupuesto estimado</p>
-            <div class="aviso-precio">
-                <p>📌 Precios válidos para el año 2025</p>
-            </div>
-            <div class="campo">
-                <label>Paquete de renta</label>
-                <div class="opciones-grid" id="paqueteOptions"></div>
-            </div>
-            <div class="campo">
-                <label>Número de invitados</label>
-                <input type="number" id="personas" value="100" min="20" max="200" step="10">
-            </div>
-            <div class="campo">
-                <label>¿Deseas contratar catering?</label>
-                <div class="opciones-grid" id="menuOptions"></div>
-            </div>
-            <div class="total-box">
-                <div style="font-size:15px;opacity:.9;letter-spacing:1.5px;position:relative;z-index:1;">INVERSIÓN ESTIMADA</div>
-                <div class="monto" id="totalMonto">$0 MXN</div>
-                <div style="font-size:13px;opacity:.8;margin-top:8px;position:relative;z-index:1;">+ IVA (16%) | Precio total del evento</div>
-            </div>
-            <button class="btn btn-primary" id="cotizarWhatsAppBtn" style="width:100%;justify-content:center;display:flex;align-items:center;gap:10px;">
-                💬 Enviar cotización por WhatsApp
-            </button>
-        </div>
-    </div>
-</section>
-
-<!-- GALERÍA -->
-<section id="galeria" class="gallery">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Nuestra Galería</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Conoce nuestros espacios y eventos realizados</p>
-        <div class="gallery-grid" id="galleryGrid"></div>
-    </div>
-</section>
-
-<!-- CALENDARIOS -->
-<section id="calendarios" class="calendarios-section">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Disponibilidad y Visitas</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Consulta fechas disponibles o agenda una visita para conocer el salón</p>
-        <div class="calendarios-grid">
-            <div class="calendario-card" data-aos="fade-right">
-                <div class="calendario-header">
-                    <h3>📅 Fechas Disponibles</h3>
-                    <p>Selecciona tu fecha ideal y confírmala con nosotros</p>
-                </div>
-                <div class="calendario-wrapper">
-                    <iframe src="https://calendar.google.com/calendar/embed?src=contacto.sartor.inmobiliaria%40gmail.com&ctz=America%2FMexico_City" frameborder="0" scrolling="no"></iframe>
-                </div>
-                <div class="calendario-actions">
-                    <button class="btn btn-primary" id="consultarFechaBtn">📅 Consultar fecha por WhatsApp</button>
-                </div>
-            </div>
-            <div class="calendario-card" data-aos="fade-left">
-                <div class="calendario-header">
-                    <h3>🏠 Agendar Visita</h3>
-                    <p>Conoce el salón personalmente. Visitas de 10:00 AM a 2:00 PM</p>
-                </div>
-                <div class="calendario-wrapper">
-                    <iframe src="https://calendar.google.com/calendar/embed?src=contacto.sartor.inmobiliaria%40gmail.com&ctz=America%2FMexico_City&mode=WEEK" frameborder="0" scrolling="no"></iframe>
-                </div>
-                <div class="calendario-actions">
-                    <button class="btn btn-outline" id="agendarVisitaBtn">🗓️ Solicitar visita por WhatsApp</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<section id="testimonios">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Lo que dicen nuestros clientes</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Experiencias reales de quienes confiaron en nosotros</p>
-        <div class="testimonials-grid" id="testimoniosGrid"></div>
-    </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">Preguntas frecuentes</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Resuelve tus dudas antes de contactarnos</p>
-        <div class="faq-grid" id="faqGrid"></div>
-    </div>
-</section>
-
-<!-- CONTACTO -->
-<section id="contacto">
-    <div class="container">
-        <h2 class="section-title" data-aos="fade-up">¿Dónde estamos?</h2>
-        <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Visítanos y enamórate del espacio</p>
-        <div class="contact-grid">
-            <div class="contact-info" data-aos="fade-right">
-                <h3>📍 El Fox Manor</h3>
-                <p>Juan Pablo II Manzana 028, Barrio de Santa María, 52755 Ocoyoacac, Méx.</p>
-                <h3>📞 Teléfono</h3>
-                <p><a href="tel:+525512345678" style="color:var(--lion-gold);font-weight:600;">(55) 1234 5678</a></p>
-                <h3>✉️ Email</h3>
-                <p><a href="mailto:contacto@foxmanor.com" style="color:var(--lion-gold);font-weight:600;">contacto@foxmanor.com</a></p>
-                <h3>⏰ Horario de atención</h3>
-                <p>Lunes a Domingo: 10:00 AM – 8:00 PM</p>
-                <h3>🎯 ¿Listo para tu evento?</h3>
-                <p>Contáctanos hoy y hagamos realidad la celebración perfecta.</p>
-            </div>
-            <div class="mapa" data-aos="fade-left">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3991.8530679283517!2d-99.47105072454399!3d19.270654581974455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cdf5d6df54d3ed%3A0x72ba2110a4369ccc!2sSAL%C3%93N%20DE%20EVENTOS%20REAL%20SARTOR!5e1!3m2!1ses-419!2smx!4v1778803567148!5m2!1ses-419!2smx" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div>
-                <h3>El Fox Manor</h3>
-                <p style="color:#cbd5e0;line-height:1.7;">Tu salón privado y exclusivo. Donde cada detalle cuenta y cada evento es una experiencia inolvidable.</p>
-            </div>
-            <div>
-                <h4>Navegar</h4>
-                <p><a href="#inicio">Inicio</a></p>
-                <p><a href="#paquetes">Paquetes</a></p>
-                <p><a href="#menu">Menú</a></p>
-                <p><a href="#cotizador">Cotizar</a></p>
-                <p><a href="#galeria">Galería</a></p>
-            </div>
-            <div>
-                <h4>Contacto</h4>
-                <p><a href="tel:+525512345678">📞 (55) 1234 5678</a></p>
-                <p><a href="mailto:contacto@foxmanor.com">✉️ contacto@foxmanor.com</a></p>
-                <p><a href="#contacto">📍 Ocoyoacac, Méx.</a></p>
-            </div>
-            <div>
-                <h4>Legal</h4>
-                <p><a href="#" id="avisoPrivacidadLink">Aviso de privacidad</a></p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 El Fox Manor – Salón de Eventos. Todos los derechos reservados.</p>
-        </div>
-    </div>
-</footer>
-
-<!-- MODAL PRIVACIDAD -->
-<div id="privacidadModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:3000;justify-content:center;align-items:center;backdrop-filter:blur(8px);">
-    <div style="background:#fff;max-width:550px;padding:42px;border-radius:24px;margin:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);border:2px solid var(--lion-gold);">
-        <h3 style="margin-bottom:20px;color:var(--delft-blue);font-size:28px;">Aviso de Privacidad</h3>
-        <p style="color:#4a5568;line-height:1.8;">El Fox Manor con domicilio en Ocoyoacac, Estado de México, es responsable de sus datos personales. La información recabada será utilizada para cotización y seguimiento de su evento. Puede ejercer sus derechos ARCO escribiendo a privacidad@foxmanor.com.</p>
-        <button onclick="document.getElementById('privacidadModal').style.display='none'" style="margin-top:32px;background:linear-gradient(135deg,var(--lion-gold),var(--dark-gold));color:#fff;border:none;padding:14px 32px;border-radius:50px;cursor:pointer;font-weight:600;">Cerrar</button>
-    </div>
-</div>
-
-<!-- MODAL GALERÍA -->
-<div id="modalGaleria" class="modal">
-    <img id="modalImg" src="" alt="Vista ampliada">
-</div>
-
-<!-- WHATSAPP FLOTANTE -->
-<a href="https://wa.me/521234567890?text=Hola%2C%20me%20interesa%20El%20Fox%20Manor" class="whatsapp-float" target="_blank" title="Contáctanos por WhatsApp">💬</a>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-// ========== DATOS ==========
-const paquetes = {
-    plata:      { nombre: "Plata",      precio: 120 },
-    centenario: { nombre: "Centenario", precio: 150 },
-    diamante:   { nombre: "Diamante",   precio: 180 }
-};
-
-// Menú de res excluido del cotizador (solo se muestra en la sección de menú)
-const menus = {
-    ninguno:  { nombre: "Sin catering",          precio: 0,   porPersona: false },
-    pollo:    { nombre: "Pollo (3 tiempos)",      precio: 395, porPersona: true  },
-    cerdo:    { nombre: "Cerdo (3 tiempos)",      precio: 385, porPersona: true  },
-    pescado:  { nombre: "Pescado (3 tiempos)",    precio: 385, porPersona: true  },
-    salmon:   { nombre: "Salmón (3 tiempos)",     precio: 415, porPersona: true  }
-};
-
-// ========== RENDERIZAR PAQUETES ==========
-function renderPaquetes() {
-    const c = document.getElementById('paqueteOptions');
-    let sel = localStorage.getItem('paqueteSeleccionado') || 'plata';
-    c.innerHTML = '';
-    for (const [k, v] of Object.entries(paquetes)) {
-        const d = document.createElement('div');
-        d.className = 'opcion-radio' + (sel === k ? ' selected' : '');
-        d.innerHTML = `
-            <div style="display:flex;align-items:center;">
-                <input type="radio" name="paquete" value="${k}" ${sel===k?'checked':''}>
-                <span style="margin-left:12px;"><strong>${v.nombre}</strong></span>
-            </div>
-            <span class="opcion-precio">$${v.precio}/persona</span>`;
-        d.querySelector('input').addEventListener('change', e => {
-            if (e.target.checked) {
-                document.querySelectorAll('#paqueteOptions .opcion-radio').forEach(el => el.classList.remove('selected'));
-                d.classList.add('selected');
-                localStorage.setItem('paqueteSeleccionado', k);
-                calcularTotal();
-            }
-        });
-        c.appendChild(d);
+const scroll = (id: string) =>
+    document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" })
+const scrollToGaleria = () => {
+    const galeriaSection = document.getElementById("galeria-espacios")
+    if (galeriaSection) {
+        galeriaSection.scrollIntoView({ behavior: "smooth", block: "start" })
     }
 }
 
-// ========== RENDERIZAR MENÚ ==========
-function renderMenu() {
-    const c = document.getElementById('menuOptions');
-    let sel = localStorage.getItem('menuSeleccionado') || 'ninguno';
-    c.innerHTML = '';
-    for (const [k, v] of Object.entries(menus)) {
-        const d = document.createElement('div');
-        d.className = 'opcion-radio' + (sel === k ? ' selected' : '');
-        d.innerHTML = `
-            <div style="display:flex;align-items:center;">
-                <input type="radio" name="menu" value="${k}" ${sel===k?'checked':''}>
-                <span style="margin-left:12px;"><strong>${v.nombre}</strong></span>
+// ─── CONTENEDOR DE IMAGEN CON ASPECT RATIO ─────────────────────────────────
+// Mantiene la imagen completa (contain) sin invadir texto.
+// Aspect ratio configurable, fondo neutro alrededor de la imagen.
+function ImageBox({
+    src,
+    alt,
+    ratio = "4/3", // "4/3" | "3/2" | "1/1" | "16/9"
+    bg = C.off,
+    borderRadius = 12,
+    style: s = {},
+}: {
+    src: string
+    alt: string
+    ratio?: string
+    bg?: string
+    borderRadius?: number
+    style?: React.CSSProperties
+}) {
+    return (
+        <div
+            style={{
+                width: "100%",
+                aspectRatio: ratio,
+                background: bg,
+                borderRadius,
+                overflow: "hidden",
+                flexShrink: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                ...s,
+            }}
+        >
+            <img
+                src={src}
+                alt={alt}
+                style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "contain",
+                    display: "block",
+                }}
+            />
+        </div>
+    )
+}
+
+// ─── NAVBAR ────────────────────────────────────────────────────────────────
+function Navbar() {
+    const [menuOpen, setMenuOpen] = useState(false)
+    const links = [
+        { id: "inicio", label: "Inicio" },
+        { id: "casas", label: "Casas" },
+        { id: "amenidades", label: "Amenidades" },
+        { id: "croquis", label: "Croquis" },
+        { id: "ubicacion", label: "Ubicación" },
+        { id: "terrenos", label: "Terrenos" },
+        { id: "aviso-privacidad", label: "Aviso de Privacidad" },
+    ]
+    return (
+        <nav
+            style={{
+                position: "sticky",
+                top: 0,
+                zIndex: 300,
+                background: C.navyD,
+                width: "100%",
+                borderBottom: "1px solid rgba(255,255,255,.06)",
+            }}
+        >
+            <div
+                style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "0 5%",
+                    height: 66,
+                    maxWidth: 1440,
+                    margin: "0 auto",
+                }}
+            >
+                <button
+                    onClick={() => scroll("inicio")}
+                    style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 1,
+                        padding: 0,
+                    }}
+                >
+                    <span
+                        style={{
+                            color: "#fff",
+                            fontSize: "clamp(12px, 4vw, 16px)",
+                            fontWeight: 800,
+                            letterSpacing: ".06em",
+                            lineHeight: 1,
+                        }}
+                    >
+                        CASAS ANDARES
+                    </span>
+                    <span
+                        style={{
+                            color: C.gold,
+                            fontSize: "clamp(7px, 3vw, 9px)",
+                            fontWeight: 700,
+                            letterSpacing: ".22em",
+                        }}
+                    >
+                        CAPULHUAC · EDO. MÉX.
+                    </span>
+                </button>
+                <div
+                    style={{ display: "flex", gap: 2, alignItems: "center" }}
+                    className="desktop-menu"
+                >
+                    {links.map((l) => (
+                        <button
+                            key={l.id}
+                            onClick={() => scroll(l.id)}
+                            style={{
+                                background: "none",
+                                border: "none",
+                                cursor: "pointer",
+                                color: "rgba(255,255,255,.6)",
+                                fontSize: 13,
+                                fontWeight: 600,
+                                padding: "6px 12px",
+                                borderRadius: 5,
+                                fontFamily: "inherit",
+                                transition: "color .15s",
+                                letterSpacing: ".01em",
+                            }}
+                            onMouseEnter={(e) =>
+                                (e.currentTarget.style.color = "#fff")
+                            }
+                            onMouseLeave={(e) =>
+                                (e.currentTarget.style.color =
+                                    "rgba(255,255,255,.6)")
+                            }
+                        >
+                            {l.label}
+                        </button>
+                    ))}
+                </div>
+                <div
+                    style={{ display: "flex", gap: 8 }}
+                    className="desktop-actions"
+                >
+                    <BtnOutline
+                        href={WA_LINK_GENERAL}
+                        light
+                        style={{ padding: "8px 16px", fontSize: 13 }}
+                    >
+                        WhatsApp
+                    </BtnOutline>
+                    <BtnGold
+                        onClick={() => scroll("contacto")}
+                        style={{ padding: "8px 18px", fontSize: 13 }}
+                    >
+                        Contacto
+                    </BtnGold>
+                </div>
+                <button
+                    onClick={() => setMenuOpen(!menuOpen)}
+                    style={{
+                        background: "none",
+                        border: "none",
+                        cursor: "pointer",
+                        display: "none",
+                        flexDirection: "column",
+                        gap: 4,
+                        padding: 8,
+                    }}
+                    className="hamburger"
+                >
+                    {[0, 1, 2].map((i) => (
+                        <span
+                            key={i}
+                            style={{
+                                width: 22,
+                                height: 2,
+                                background: "#fff",
+                                borderRadius: 2,
+                            }}
+                        />
+                    ))}
+                </button>
             </div>
-            <span class="opcion-precio">${v.precio === 0 ? 'No aplica' : '+$'+v.precio+'/persona'}</span>`;
-        d.querySelector('input').addEventListener('change', e => {
-            if (e.target.checked) {
-                document.querySelectorAll('#menuOptions .opcion-radio').forEach(el => el.classList.remove('selected'));
-                d.classList.add('selected');
-                localStorage.setItem('menuSeleccionado', k);
-                calcularTotal();
-            }
-        });
-        c.appendChild(d);
+            {menuOpen && (
+                <div
+                    style={{
+                        background: C.navyD,
+                        padding: "20px 5%",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 12,
+                        borderTop: "1px solid rgba(255,255,255,.1)",
+                    }}
+                    className="mobile-menu"
+                >
+                    {links.map((l) => (
+                        <button
+                            key={l.id}
+                            onClick={() => {
+                                scroll(l.id)
+                                setMenuOpen(false)
+                            }}
+                            style={{
+                                background: "none",
+                                border: "none",
+                                cursor: "pointer",
+                                color: "#fff",
+                                fontSize: 16,
+                                fontWeight: 600,
+                                padding: "10px 0",
+                                textAlign: "left",
+                                fontFamily: "inherit",
+                            }}
+                        >
+                            {l.label}
+                        </button>
+                    ))}
+                    <div style={{ display: "flex", gap: 12, marginTop: 10 }}>
+                        <BtnOutline
+                            href={WA_LINK_GENERAL}
+                            light
+                            style={{ flex: 1, justifyContent: "center" }}
+                        >
+                            WhatsApp
+                        </BtnOutline>
+                        <BtnGold
+                            onClick={() => {
+                                scroll("contacto")
+                                setMenuOpen(false)
+                            }}
+                            style={{ flex: 1, justifyContent: "center" }}
+                        >
+                            Contacto
+                        </BtnGold>
+                    </div>
+                </div>
+            )}
+            <style>{`
+                @media (max-width: 768px) {
+                    .desktop-menu { display: none !important; }
+                    .desktop-actions { display: none !important; }
+                    .hamburger { display: flex !important; }
+                }
+                @media (min-width: 769px) {
+                    .mobile-menu { display: none !important; }
+                }
+            `}</style>
+        </nav>
+    )
+}
+
+// ─── HERO ─────────────────────────────────────────────────────────────────
+// FIX: overlay reducido de .93 → .65 en el stop izquierdo para que la imagen se vea más.
+function Hero() {
+    return (
+        <section
+            id="inicio"
+            style={{
+                position: "relative",
+                minHeight: "100vh",
+                display: "flex",
+                alignItems: "center",
+            }}
+        >
+            <div
+                style={{
+                    position: "absolute",
+                    inset: 0,
+                    backgroundImage: `url(${IMG.hero})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                }}
+            />
+            {/* CAMBIO: opacidad del gradiente reducida — antes era .93/.55, ahora .65/.30 */}
+            <div
+                style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                        "linear-gradient(105deg,rgba(5,15,26,.65) 38%,rgba(5,15,26,.30) 100%)",
+                }}
+            />
+            <div
+                style={{
+                    position: "relative",
+                    padding: "clamp(40px, 10vw, 80px) 5%",
+                    maxWidth: 1440,
+                    margin: "0 auto",
+                    width: "100%",
+                }}
+            >
+                <div style={{ textAlign: "center", marginBottom: 20 }}>
+                    {tag("Xometitla, Capulhuac · Edo. Méx.", C.gold, "#fff")}
+                </div>
+                <h1
+                    style={{
+                        fontSize: "clamp(40px, 10vw, 60px)",
+                        fontWeight: 800,
+                        color: "#fff",
+                        lineHeight: 1.08,
+                        margin: "20px 0 18px",
+                        textAlign: "center",
+                    }}
+                >
+                    CASAS ANDARES
+                    <br />
+                    <span style={{ color: C.gold }}>CAPULHUAC</span>
+                </h1>
+                <p
+                    style={{
+                        fontSize: "clamp(14px, 4vw, 18px)",
+                        color: "rgba(255,255,255,.82)",
+                        lineHeight: 1.75,
+                        maxWidth: 600,
+                        margin: "0 auto 38px",
+                        textAlign: "center",
+                    }}
+                >
+                    {PROYECTO.tagline}. Desarrollo privado con 10 casas nuevas,
+                    seguridad 24/7 y amenidades.
+                </p>
+                <div
+                    style={{
+                        display: "flex",
+                        gap: 12,
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                        marginBottom: 56,
+                    }}
+                >
+                    <BtnGold onClick={() => scroll("casas")}>
+                        Ver casas disponibles
+                    </BtnGold>
+                    <BtnOutline href={WA_LINK_CITA} light>
+                        Agendar visita
+                    </BtnOutline>
+                </div>
+                <div
+                    style={{
+                        display: "flex",
+                        gap: "clamp(20px, 5vw, 36px)",
+                        flexWrap: "wrap",
+                        justifyContent: "center",
+                    }}
+                >
+                    {[
+                        [PROYECTO.venta, "Precio de venta"],
+                        [PROYECTO.renta, "Renta mensual"],
+                        [PROYECTO.construccion, "Construcción"],
+                        [PROYECTO.casasTotales, "En el desarrollo"],
+                    ].map(([v, l]) => (
+                        <div key={l as string} style={{ textAlign: "center" }}>
+                            <div
+                                style={{
+                                    fontSize: "clamp(18px, 5vw, 22px)",
+                                    fontWeight: 800,
+                                    color: "#fff",
+                                }}
+                            >
+                                {v}
+                            </div>
+                            <div
+                                style={{
+                                    fontSize: 11,
+                                    color: "rgba(255,255,255,.55)",
+                                    marginTop: 3,
+                                }}
+                            >
+                                {l}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}
+
+// ─── BANNER DE BONO ────────────────────────────────────────────────────────
+//function BannerBono() {
+ //   const [visible, setVisible] = useState(true)
+ //   if (!visible) return null
+  //  return (
+    //    <div
+    //        style={{
+       //         background: `linear-gradient(90deg, ${C.gold} 0%, #d4a93a 50%, ${C.gold} 100%)`,
+        //        padding: "0",
+      //          position: "relative",
+      //          overflow: "hidden",
+        //    }}
+      //  >
+       //     <div
+        //        style={{
+        //            position: "absolute",
+         //           inset: 0,
+          //          backgroundImage:
+        //                "repeating-linear-gradient(45deg, rgba(255,255,255,.04) 0px, rgba(255,255,255,.04) 1px, transparent 1px, transparent 20px)",
+        //            pointerEvents: "none",
+       //         }}
+       //     />
+      //      <div
+      //          style={{
+       //             maxWidth: 1440,
+      //              margin: "0 auto",
+     //               padding: "clamp(18px, 4vw, 28px) 5%",
+   //                 display: "flex",
+   //                 alignItems: "center",
+    //                justifyContent: "space-between",
+    //                gap: 20,
+    //                flexWrap: "wrap",
+   //                 position: "relative",
+   //             }}
+   //         >
+   //             <div
+   //                 style={{
+   //                     display: "flex",
+   //                     alignItems: "center",
+   //                     gap: "clamp(12px, 3vw, 24px)",
+    //                    flexWrap: "wrap",
+    //                }}
+    //            >
+    //                <div
+    //                    style={{
+     //                       background: "rgba(255,255,255,.2)",
+     //                       borderRadius: "50%",
+       //                     width: 52,
+         //                   height: 52,
+         //                   display: "flex",
+           //                 alignItems: "center",
+             //               justifyContent: "center",
+              //              fontSize: 26,
+                            //flexShrink: 0,
+  //                          border: "2px solid rgba(255,255,255,.35)",
+    //                    }}
+      //              >
+        //                🎁
+          //          </div>
+            //        <div>
+              //          <div
+                //            style={{
+                  //              fontSize: "clamp(11px, 3vw, 12px)",
+//                                fontWeight: 800,
+  //                              color: "rgba(255,255,255,.85)",
+    //                            letterSpacing: ".12em",
+      //                          textTransform: "uppercase",
+        //                        marginBottom: 4,
+          //                  }}
+            //            >
+              //              ¡Oferta por tiempo limitado!
+                //        </div>
+                  //      <div
+                    //        style={{
+//                                fontSize: "clamp(16px, 4vw, 22px)",
+  //                              fontWeight: 800,
+    //                            color: "#fff",
+      //                          lineHeight: 1.2,
+        //                    }}
+          //              >
+            //                Bono especial en la compra de tu casa 🏠
+              //          </div>
+                //        <div
+                  //          style={{
+//                                fontSize: "clamp(12px, 3vw, 14px)",
+  //                              color: "rgba(255,255,255,.85)",
+    //                            marginTop: 4,
+      //                      }}
+        //                >
+          //                  Al comprar tu casa, recibes un bono exclusivo.
+            //                Pregunta por las condiciones —{" "}
+              //              <strong style={{ color: "#fff" }}>
+                //                ¡casas disponibles ahora!
+                  //          </strong>
+//                        </div>
+  //                  </div>
+    //            </div>
+      //          <div
+        //            style={{
+          //              display: "flex",
+            //            alignItems: "center",
+  //                      gap: 12,
+    //                    flexShrink: 0,
+      //              }}
+        //        >
+          //         {/* <a
+            //            href={WA_LINK_CITA}
+              //          target="_blank"
+                //        rel="noreferrer"
+                  //      style={{
+                    //        background: "#fff",
+                      //      color: C.gold,
+    //                        fontSize: "clamp(12px, 3vw, 14px)",
+      //                      fontWeight: 800,
+        //                    padding: "10px 22px",
+          //                  borderRadius: 6,
+            //                textDecoration: "none",
+              //              letterSpacing: ".02em",
+                //            boxShadow: "0 4px 14px rgba(0,0,0,.15)",
+                  //          display: "inline-flex",
+                    //        alignItems: "center",
+                      //      gap: 6,
+                        //}}
+//                    >
+  //                      💬 Quiero mi bono
+    //                </a> */}
+      //              <button
+        //                onClick={() => setVisible(false)}
+          //              style={{
+            //                background: "rgba(255,255,255,.2)",
+              //              border: "none",
+                //            cursor: "pointer",
+                  //          color: "#fff",
+                    //        borderRadius: "50%",
+                      //      width: 30,
+//                            height: 30,
+  //                          display: "flex",
+    //                        alignItems: "center",
+      //                      justifyContent: "center",
+        //                    fontSize: 16,
+          //                  fontWeight: 700,
+            //                flexShrink: 0,
+              //          }}
+//                    >
+//                        ✕
+  //                  </button>
+//                </div>
+//            </div>
+//        </div>
+//    )
+//}
+
+// ─── DESCRIPCIÓN ─────────────────────────────────────────────────────────
+function Descripcion() {
+    return (
+        <section
+            style={{
+                background: C.off,
+                padding: "clamp(40px, 10vw, 72px) 5%",
+                borderBottom: `1px solid ${C.border}`,
+            }}
+        >
+            <div
+                style={{
+                    maxWidth: 1440,
+                    margin: "0 auto",
+                    display: "grid",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                    gap: 40,
+                    alignItems: "center",
+                }}
+            >
+                <div>
+                    {tag("EL PROYECTO")}
+                    <h2
+                        style={{
+                            fontSize: "clamp(28px, 5vw, 34px)",
+                            fontWeight: 800,
+                            color: C.navy,
+                            margin: "14px 0 16px",
+                            lineHeight: 1.2,
+                        }}
+                    >
+                        Un desarrollo pensado para vivir bien
+                    </h2>
+                    <p
+                        style={{
+                            fontSize: "clamp(14px, 4vw, 16px)",
+                            color: C.muted,
+                            lineHeight: 1.8,
+                            marginBottom: 24,
+                        }}
+                    >
+                        {PROYECTO.desc}
+                    </p>
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns:
+                                "repeat(auto-fit, minmax(100px, 1fr))",
+                            gap: 12,
+                        }}
+                    >
+                        {[
+                            [PROYECTO.casasTotales, "Total de casas"],
+                            [PROYECTO.casasVenta, ""],
+                            [PROYECTO.casasRenta, ""],
+                            [PROYECTO.construccion, "Construcción"],
+                            [PROYECTO.predio, "Predio c/u"],
+                            [PROYECTO.plantas, "Por casa"],
+                            ["24/7", "Vigilancia"],
+                            ["100%", "Servicios"],
+                        ].map(([v, l]) => (
+                            <div
+                                key={(l as string) || (v as string)}
+                                style={{
+                                    background: C.white,
+                                    border: `1px solid ${C.border}`,
+                                    borderRadius: 10,
+                                    padding: "14px 12px",
+                                    textAlign: "center",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        fontSize: "clamp(14px, 4vw, 18px)",
+                                        fontWeight: 800,
+                                        color: C.navy,
+                                    }}
+                                >
+                                    {v}
+                                </div>
+                                {l && (
+                                    <div
+                                        style={{
+                                            fontSize: 11,
+                                            color: C.muted,
+                                            marginTop: 3,
+                                        }}
+                                    >
+                                        {l}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                {/* FIX: ImageBox con ratio 4/3 — imagen completa, no invade texto */}
+                <ImageBox
+                    src={IMG.hero}
+                    alt="Casas"
+                    ratio="4/3"
+                    bg={C.navyL}
+                    borderRadius={16}
+                />
+            </div>
+        </section>
+    )
+}
+
+// ─── CASAS (VENTA/RENTA) - SECCIÓN 1 ─────────────────────────────────────────
+function Casas() {
+    return (
+        <section
+            id="casas"
+            style={{
+                background: C.white,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    badge="CASAS DISPONIBLES"
+                    title="3 en venta y 7 en renta"
+                    sub="Un solo prototipo de casa, diseñado con todo lo que necesitas para vivir cómodamente."
+                />
+
+                {/* Tarjetas de VENTA y RENTA - UNA AL LADO DE LA OTRA */}
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px,1fr)",
+                        gap: 24,
+                        maxWidth: 900,
+                        margin: "0 auto",
+                    }}
+                >
+                    {/* Tarjeta VENTA */}
+                    <div
+                        style={{
+                            border: `1px solid ${C.border}`,
+                            borderRadius: 20,
+                            overflow: "hidden",
+                            transition: "all .25s",
+                            display: "flex",
+                            flexDirection: "column",
+                            background: C.white,
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "translateY(-6px)"
+                            e.currentTarget.style.boxShadow =
+                                "0 20px 48px rgba(11,61,107,.12)"
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "none"
+                            e.currentTarget.style.boxShadow = "none"
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: "100%",
+                                aspectRatio: "4/3",
+                                background: `linear-gradient(135deg, ${C.goldL} 0%, ${C.off} 100%)`,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                padding: 16,
+                            }}
+                        >
+                            <img
+                                src={IMG.casaA}
+                                alt="Casa en venta"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                }}
+                            />
+                        </div>
+                        <div style={{ padding: "24px" }}>
+                            {tag("VENTA", C.goldL, C.gold)}
+                            <div
+                                style={{
+                                    fontSize: 28,
+                                    fontWeight: 800,
+                                    color: C.navy,
+                                    margin: "12px 0 4px",
+                                }}
+                            >
+                                {PROYECTO.venta}
+                            </div>
+                            <div
+                                style={{
+                                    fontSize: 13,
+                                    color: C.muted,
+                                    marginBottom: 12,
+                                }}
+                            >
+                                3 casas disponibles
+                            </div>
+                            <div style={{ marginBottom: 16 }}>
+                                <Pill>{PROYECTO.construccion}</Pill>
+                                <Pill>{PROYECTO.plantas}</Pill>
+                                <Pill>3 recámaras</Pill>
+                                <Pill>2.5 baños</Pill>
+                                <Pill>2 cajones de estacionamiento </Pill>
+                            </div>
+                            <BtnGold onClick={scrollToGaleria} full>
+                                📸 Ver espacios disponibles
+                            </BtnGold>
+                        </div>
+                    </div>
+
+                    {/* Tarjeta RENTA */}
+                    <div
+                        style={{
+                            border: `1px solid ${C.border}`,
+                            borderRadius: 20,
+                            overflow: "hidden",
+                            transition: "all .25s",
+                            display: "flex",
+                            flexDirection: "column",
+                            background: C.white,
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = "translateY(-6px)"
+                            e.currentTarget.style.boxShadow =
+                                "0 20px 48px rgba(26,143,104,.1)"
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = "none"
+                            e.currentTarget.style.boxShadow = "none"
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: "100%",
+                                aspectRatio: "4/3",
+                                background: `linear-gradient(135deg, ${C.greenL} 0%, ${C.off} 100%)`,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                padding: 16,
+                            }}
+                        >
+                            <img
+                                src={IMG.casaB}
+                                alt="Casa en renta"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                }}
+                            />
+                        </div>
+                        <div style={{ padding: "24px" }}>
+                            {tag("RENTA", C.greenL, C.green)}
+                            <div
+                                style={{
+                                    fontSize: 28,
+                                    fontWeight: 800,
+                                    color: C.green,
+                                    margin: "12px 0 4px",
+                                }}
+                            >
+                                {PROYECTO.renta}
+                            </div>
+                            <div
+                                style={{
+                                    fontSize: 13,
+                                    color: C.muted,
+                                    marginBottom: 12,
+                                }}
+                            >
+                                7 casas disponibles
+                            </div>
+                            <div style={{ marginBottom: 16 }}>
+                                <Pill bg={C.greenL} color={C.green}>
+                                    {PROYECTO.construccion}
+                                </Pill>
+                                <Pill bg={C.greenL} color={C.green}>
+                                    {PROYECTO.plantas}
+                                </Pill>
+                                <Pill bg={C.greenL} color={C.green}>
+                                    3 recámaras
+                                </Pill>
+                                <Pill bg={C.greenL} color={C.green}>
+                                    2.5 baños
+                                </Pill>
+                                <Pill bg={C.greenL} color={C.green}>
+                                    2 cajones de estacionamiento 
+                                </Pill>
+                            </div>
+                            <BtnGold
+                                onClick={scrollToGaleria}
+                                full
+                                style={{ background: C.green }}
+                            >
+                                📸 Ver espacios disponibles
+                            </BtnGold>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+// ─── DISTRIBUCIÓN Y GALERÍA (SECCIÓN 2 - COMPLETAMENTE SEPARADA) ────────────
+function DistribucionGaleria() {
+    return (
+        <section
+            style={{
+                background: C.off,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+                borderTop: `1px solid ${C.border}`,
+                borderBottom: `1px solid ${C.border}`,
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    badge="DISTRIBUCIÓN"
+                    title="Conoce el interior de tu hogar"
+                    sub="Diseño inteligente que aprovecha cada espacio para tu comodidad."
+                    center
+                />
+
+                {/* ===== PLANTA BAJA ===== */}
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: 48,
+                        alignItems: "center",
+                        marginBottom: 80,
+                    }}
+                >
+                    <div>
+                        <h3
+                            style={{
+                                fontSize: 28,
+                                fontWeight: 800,
+                                color: C.gold,
+                                marginBottom: 8,
+                            }}
+                        >
+                            📍 PLANTA BAJA
+                        </h3>
+                        <div
+                            style={{
+                                width: 50,
+                                height: 3,
+                                background: C.gold,
+                                marginBottom: 20,
+                            }}
+                        />
+                        <ul style={{ listStyle: "none", padding: 0 }}>
+                            {[
+                                "Sala – comedor amplio con luz natural",
+                                "Cocina integral con campana extractora, parrilla y tarja",
+                                "Medio baño de visitas",
+                                "Estacionamiento techado (1 cajón)",
+                                "Jardín privado",
+                                "Escalera con domo de iluminación natural",
+                                "Área de lavado",
+                            ].map((item, i) => (
+                                <li
+                                    key={i}
+                                    style={{
+                                        display: "flex",
+                                        gap: 12,
+                                        marginBottom: 14,
+                                        fontSize: 15,
+                                        color: C.text,
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            color: C.gold,
+                                            fontSize: 18,
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        ✓
+                                    </span>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div
+                        style={{
+                            background: C.white,
+                            borderRadius: 20,
+                            overflow: "hidden",
+                            boxShadow: "0 12px 28px rgba(0,0,0,0.08)",
+                            cursor: "pointer",
+                        }}
+                        onClick={() =>
+                            window.open(
+                                "https://i.postimg.cc/HkGHd5yd/PLANTA-BAJA.png",
+                                "_blank"
+                            )
+                        }
+                    >
+                        <div
+                            style={{
+                                width: "100%",
+                                aspectRatio: "4/3",
+                                background: C.navyL,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <img
+                                src="https://i.postimg.cc/HkGHd5yd/PLANTA-BAJA.png"
+                                alt="Planta Baja"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                }}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                padding: "12px 16px",
+                                textAlign: "center",
+                                fontSize: 12,
+                                color: C.muted,
+                                background: C.navyL,
+                            }}
+                        >
+                            🖱️ Haz clic para ampliar
+                        </div>
+                    </div>
+                </div>
+
+                {/* ===== PLANTA ALTA ===== */}
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: 48,
+                        alignItems: "center",
+                        marginBottom: 80,
+                    }}
+                >
+                    <div style={{ order: 2 }}>
+                        <h3
+                            style={{
+                                fontSize: 28,
+                                fontWeight: 800,
+                                color: C.navy,
+                                marginBottom: 8,
+                            }}
+                        >
+                            📍 PLANTA ALTA
+                        </h3>
+                        <div
+                            style={{
+                                width: 50,
+                                height: 3,
+                                background: C.navy,
+                                marginBottom: 20,
+                            }}
+                        />
+                        <ul style={{ listStyle: "none", padding: 0 }}>
+                            {[
+                                "Recámara principal con baño completo y vestidor",
+                                "Recámara principal con balcón y barandal",
+                                "2 recámaras adicionales con clóset",
+                                "Baño completo compartido (segundo baño)",
+                            ].map((item, i) => (
+                                <li
+                                    key={i}
+                                    style={{
+                                        display: "flex",
+                                        gap: 12,
+                                        marginBottom: 14,
+                                        fontSize: 15,
+                                        color: C.text,
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <span
+                                        style={{
+                                            color: C.navy,
+                                            fontSize: 18,
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        ✓
+                                    </span>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div
+                        style={{
+                            background: C.white,
+                            borderRadius: 20,
+                            overflow: "hidden",
+                            boxShadow: "0 12px 28px rgba(0,0,0,0.08)",
+                            cursor: "pointer",
+                            order: 1,
+                        }}
+                        onClick={() =>
+                            window.open(
+                                "https://i.postimg.cc/RZr94fnj/PLANTA-ALTA.png",
+                                "_blank"
+                            )
+                        }
+                    >
+                        <div
+                            style={{
+                                width: "100%",
+                                aspectRatio: "1/1",
+                                background: C.navyL,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <img
+                                src="https://i.postimg.cc/RZr94fnj/PLANTA-ALTA.png"
+                                alt="Planta Alta"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                }}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                padding: "12px 16px",
+                                textAlign: "center",
+                                fontSize: 12,
+                                color: C.muted,
+                                background: C.navyL,
+                            }}
+                        >
+                            🖱️ Haz clic para ampliar
+                        </div>
+                    </div>
+                </div>
+
+                {/* ===== INSTALACIONES ===== */}
+                <div
+                    style={{
+                        background: `linear-gradient(135deg, ${C.white} 0%, ${C.navyL} 100%)`,
+                        borderRadius: 24,
+                        padding: "clamp(24px, 5vw, 40px)",
+                        border: `1px solid ${C.border}`,
+                    }}
+                >
+                    <h3
+                        style={{
+                            fontSize: 24,
+                            fontWeight: 800,
+                            color: C.green,
+                            marginBottom: 24,
+                            textAlign: "center",
+                        }}
+                    >
+                        ⚙️ Instalaciones y equipamiento
+                    </h3>
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns:
+                                "repeat(auto-fit, minmax(220px, 1fr))",
+                            gap: 20,
+                        }}
+                    >
+                        {[
+                            { icon: "💧", text: "Tinaco de 1,100 litros" },
+                            {
+                                icon: "⛽",
+                                text: "Tanque estacionario de gas",
+                            },
+                            { icon: "🔥", text: "Calentador de paso" },
+                            {
+                                icon: "☀️",
+                                text: "Calentador solar",
+                            },
+                        ].map((item) => (
+                            <div
+                                key={item.text}
+                                style={{
+                                    background: C.white,
+                                    borderRadius: 12,
+                                    padding: "16px 20px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 14,
+                                    boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
+                                }}
+                            >
+                                <span style={{ fontSize: 28 }}>
+                                    {item.icon}
+                                </span>
+                                <span
+                                    style={{
+                                        fontSize: 14,
+                                        fontWeight: 600,
+                                        color: C.text,
+                                    }}
+                                >
+                                    {item.text}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+// ─── GALERÍA DE ESPACIOS (NUEVA SECCIÓN) ───────────────────────────────────
+const GALERIA_ESPACIOS = [
+    {
+        id: "sala",
+        titulo: "Sala - Comedor",
+        desc: "Amplio espacio con luz natural, ideal para reuniones familiares.",
+        icon: "🛋️",
+        src: "https://i.postimg.cc/9M34Qt95/Sala-Comedor.jpg",
+    },
+    {
+        id: "recamara-principal",
+        titulo: "Recámara Principal",
+        desc: "Con baño completo, vestidor, clóset y balcón con barandal.",
+        icon: "🛏️",
+        src: "https://i.postimg.cc/prCyCw6W/RECAMARA-PRINCIPAL.jpg",
+    },
+    {
+        id: "Recamara-secundaria",
+        titulo: "Recámaras Secundarias",
+        desc: "2 recámaras adicionales con clóset y buena iluminación.",
+        icon: "🛌",
+        src: "https://i.postimg.cc/NFDLD3zM/RECAMARA-2.png",
+    },
+    {
+        id: "Jardin",
+        titulo: "Jardín Privado",
+        desc: "Espacio verde para disfrutar en familia o mascotas.",
+        icon: "🌿",
+        src: "https://i.postimg.cc/wBNvZyGG/jardi-n.jpg",
+    },
+    {
+        id: "Fachada",
+        titulo: "Fachada Moderna",
+        desc: "Diseño contemporáneo con barra de acceso exterior.",
+        icon: "🏠",
+        src: IMG.fachada,
+    },
+    {
+        id: "terraza",
+        titulo: "Terraza",
+        desc: "Vistas agradables y ventilación natural todo el año.",
+        icon: "🌅",
+        src: "https://i.postimg.cc/ZR1XgnXQ/Captura-de-Pantalla-2026-04-27-a-la(s)-17-57-56.png",
+    },
+    {
+        id: "estacionamiento",
+        titulo: "Estacionamiento",
+        desc: "Techado con espacio para 1 vehículo.",
+        icon: "🚗",
+        src: "https://i.postimg.cc/y8sCsJxQ/COCHERA.jpg",
+    },
+]
+
+function GaleriaEspacios() {
+    const [selectedImage, setSelectedImage] = useState(null)
+
+    return (
+        <section
+            id="galeria-espacios"
+            style={{
+                background: C.navyD,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    light
+                    center
+                    badge="ESPACIOS DISPONIBLES"
+                    title="Galería de la casa"
+                    sub="Conoce cada rincón de tu nuevo hogar antes de decidirte."
+                />
+                <div
+                    style={{
+                        maxWidth: 1440,
+                        margin: "0 auto",
+                        background: "rgba(255,255,255,.07)",
+                        border: "1px solid rgba(255,255,255,.15)",
+                        borderRadius: 14,
+                        padding: "14px 20px",
+                        marginBottom: 32,
+                        display: "flex",
+                        alignItems: "flex-start",
+                        gap: 14,
+                    }}
+                >
+                    <span style={{ fontSize: 22, flexShrink: 0, marginTop: 2 }}>
+                        🛋️
+                    </span>
+                    <div>
+                        <div
+                            style={{
+                                fontSize: 13,
+                                fontWeight: 700,
+                                color: "#fff",
+                                marginBottom: 4,
+                            }}
+                        >
+                            Renders de ambientación — los muebles no están
+                            incluidos
+                        </div>
+                        <div
+                            style={{
+                                fontSize: 12,
+                                color: "rgba(255,255,255,.55)",
+                                lineHeight: 1.6,
+                            }}
+                        >
+                            Las imágenes muestran los espacios{" "}
+                            <em>amueblados a modo de referencia</em> para que
+                            puedas visualizar su potencial. Las casas se
+                            entregan sin muebles.
+                        </div>
+                    </div>
+                </div>
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(320px, 1fr))",
+                        gap: 28,
+                    }}
+                >
+                    {GALERIA_ESPACIOS.map((espacio) => (
+                        <div
+                            key={espacio.id}
+                            style={{
+                                background: "rgba(255,255,255,.05)",
+                                borderRadius: 20,
+                                overflow: "hidden",
+                                backdropFilter: "blur(2px)",
+                                transition:
+                                    "transform 0.3s ease, box-shadow 0.3s ease",
+                                cursor: "pointer",
+                                border: "1px solid rgba(255,255,255,.1)",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform =
+                                    "translateY(-8px)"
+                                e.currentTarget.style.boxShadow =
+                                    "0 24px 40px rgba(0,0,0,0.3)"
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform =
+                                    "translateY(0)"
+                                e.currentTarget.style.boxShadow = "none"
+                            }}
+                            onClick={() => setSelectedImage(espacio)}
+                        >
+                            <div
+                                style={{
+                                    width: "100%",
+                                    aspectRatio: "16/10",
+                                    overflow: "hidden",
+                                    background: C.navyL,
+                                    position: "relative",
+                                }}
+                            >
+                                <img
+                                    src={espacio.src}
+                                    alt={espacio.titulo}
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "cover",
+                                        transition: "transform 0.5s ease",
+                                    }}
+                                    onMouseEnter={(e) =>
+                                        (e.currentTarget.style.transform =
+                                            "scale(1.05)")
+                                    }
+                                    onMouseLeave={(e) =>
+                                        (e.currentTarget.style.transform =
+                                            "scale(1)")
+                                    }
+                                />
+                                <div
+                                    style={{
+                                        position: "absolute",
+                                        top: 12,
+                                        left: 12,
+                                        background: "rgba(0,0,0,0.6)",
+                                        borderRadius: 30,
+                                        padding: "6px 14px",
+                                        fontSize: 20,
+                                        backdropFilter: "blur(4px)",
+                                    }}
+                                >
+                                    {espacio.icon}
+                                </div>
+                            </div>
+                            <div style={{ padding: "20px" }}>
+                                <h3
+                                    style={{
+                                        fontSize: 18,
+                                        fontWeight: 700,
+                                        color: "#fff",
+                                        marginBottom: 8,
+                                    }}
+                                >
+                                    {espacio.titulo}
+                                </h3>
+                                <p
+                                    style={{
+                                        fontSize: 13,
+                                        color: "rgba(255,255,255,.6)",
+                                        lineHeight: 1.5,
+                                    }}
+                                >
+                                    {espacio.desc}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Modal para ver imagen ampliada */}
+                {selectedImage && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: "rgba(0,0,0,0.95)",
+                            zIndex: 1000,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            backdropFilter: "blur(8px)",
+                        }}
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div
+                            style={{
+                                maxWidth: "90vw",
+                                maxHeight: "90vh",
+                                position: "relative",
+                            }}
+                        >
+                            <img
+                                src={selectedImage.src}
+                                alt={selectedImage.titulo}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                    borderRadius: 12,
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    bottom: -40,
+                                    left: 0,
+                                    right: 0,
+                                    textAlign: "center",
+                                    color: "#fff",
+                                    fontSize: 14,
+                                }}
+                            >
+                                <strong>{selectedImage.titulo}</strong> -{" "}
+                                {selectedImage.desc}
+                            </div>
+                            <button
+                                style={{
+                                    position: "absolute",
+                                    top: -40,
+                                    right: 0,
+                                    background: "none",
+                                    border: "none",
+                                    color: "#fff",
+                                    fontSize: 28,
+                                    cursor: "pointer",
+                                    padding: "8px 16px",
+                                }}
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                ✕ Cerrar
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {/* Botón de contacto al final de la galería */}
+                <div style={{ textAlign: "center", marginTop: 48 }}>
+                    <BtnGold
+                        href={WA_LINK_CITA}
+                        style={{
+                            padding: "14px 32px",
+                            fontSize: 16,
+                            gap: 8,
+                        }}
+                    >
+                        🏠 Agendar visita
+                    </BtnGold>
+                    <p
+                        style={{
+                            fontSize: 12,
+                            color: "rgba(255,255,255,.4)",
+                            marginTop: 16,
+                        }}
+                    >
+                        * Haz clic en cualquier imagen para verla a tamaño
+                        completo
+                    </p>
+                </div>
+            </div>
+        </section>
+    )
+}
+// ─── AMENIDADES ────────────────────────────────────────────────────────────
+function Amenidades() {
+    return (
+        <section
+            id="amenidades"
+            style={{
+                background: C.navyD,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    light
+                    center
+                    badge="AMENIDADES"
+                    title="Todo lo que necesitas está aquí"
+                    sub="Está diseñado para que no tengas que salir del fraccionamiento para lo esencial."
+                />
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(220px, 1fr))",
+                        gap: 14,
+                        marginBottom: 48,
+                    }}
+                >
+                    {AMENIDADES.map((a) => (
+                        <div
+                            key={a.titulo}
+                            style={{
+                                background: "rgba(255,255,255,.05)",
+                                border: "1px solid rgba(255,255,255,.07)",
+                                borderRadius: 14,
+                                padding: "22px 18px",
+                                transition: "all .2s",
+                                textAlign: "center",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.background =
+                                    "rgba(255,255,255,.09)"
+                                e.currentTarget.style.borderColor = `rgba(184,149,42,.4)`
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.background =
+                                    "rgba(255,255,255,.05)"
+                                e.currentTarget.style.borderColor =
+                                    "rgba(255,255,255,.07)"
+                            }}
+                        >
+                            <div style={{ fontSize: 26 }}>{a.icon}</div>
+                            <div
+                                style={{
+                                    fontSize: 14,
+                                    fontWeight: 700,
+                                    color: "#fff",
+                                    marginBottom: 6,
+                                }}
+                            >
+                                {a.titulo}
+                            </div>
+                            <div
+                                style={{
+                                    fontSize: 12,
+                                    color: "rgba(255,255,255,.5)",
+                                    lineHeight: 1.6,
+                                }}
+                            >
+                                {a.desc}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    )
+}
+
+// ─── CROQUIS ───────────────────────────────────────────────────────────────
+function Croquis() {
+    return (
+        <section
+            id="croquis"
+            style={{ background: C.off, padding: "clamp(40px, 10vw, 88px) 5%" }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    badge="DISTRIBUCIÓN"
+                    title="Croquis del fraccionamiento"
+                    sub="Visualiza cómo están distribuidas las 10 casas dentro."
+                />
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: 32,
+                        alignItems: "start",
+                    }}
+                >
+                    <div
+                        style={{
+                            background: C.white,
+                            border: `1px solid ${C.border}`,
+                            borderRadius: 16,
+                            overflow: "hidden",
+                        }}
+                    >
+                        {/* Croquis: imagen propia → contain con fondo claro */}
+                        <div
+                            style={{
+                                width: "100%",
+                                aspectRatio: "1/1",
+                                background: C.navyL,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <img
+                                src={IMG.croquis}
+                                alt="Plano referencial"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                    display: "block",
+                                }}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                padding: "16px 20px",
+                                background: C.navyL,
+                                textAlign: "center",
+                            }}
+                        >
+                            <p
+                                style={{
+                                    fontSize: 12,
+                                    color: C.muted,
+                                    margin: 0,
+                                }}
+                            >
+                                * Imagen referencial. El croquis definitivo se
+                                entrega con la visita.
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 12,
+                        }}
+                    >
+                        {[
+                            ["10", "Casas en total"],
+                            ["3", "Casas en venta"],
+                            ["7", "Casas en renta"],
+                            ["2", "Plantas por casa"],
+                            ["1", "Acceso principal"],
+                            ["Privado", "Fraccionamiento cerrado"],
+                            ["Pavimentadas", "Calles internas"],
+                            ["Áreas verdes", "Espacios comunes"],
+                        ].map(([v, l]) => (
+                            <div
+                                key={l}
+                                style={{
+                                    background: C.white,
+                                    border: `1px solid ${C.border}`,
+                                    borderRadius: 10,
+                                    padding: "14px 16px",
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                    alignItems: "center",
+                                }}
+                            >
+                                <span style={{ fontSize: 13, color: C.muted }}>
+                                    {l}
+                                </span>
+                                <span
+                                    style={{
+                                        fontSize: 14,
+                                        fontWeight: 700,
+                                        color: C.navy,
+                                    }}
+                                >
+                                    {v}
+                                </span>
+                            </div>
+                        ))}
+                        <BtnGold
+                            onClick={() => scroll("contacto")}
+                            style={{ marginTop: 6, justifyContent: "center" }}
+                        >
+                            Solicitar plano completo
+                        </BtnGold>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+// ─── UBICACIÓN ─────────────────────────────────────────────────────────────
+function Ubicacion() {
+    return (
+        <section
+            id="ubicacion"
+            style={{
+                background: C.white,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    center
+                    badge="UBICACIÓN"
+                    title="Xometitla, Capulhuac"
+                    sub="Excelente conectividad con el Valle de Toluca y la CDMX."
+                />
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: 32,
+                        alignItems: "start",
+                    }}
+                >
+                    <div
+                        style={{
+                            borderRadius: 16,
+                            overflow: "hidden",
+                            boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+                        }}
+                    >
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d826.7618906425267!2d-99.47626724067962!3d19.193722186233792!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ses-419!2smx!4v1775735843184!5m2!1ses-419!2smx"
+                            width="100%"
+                            height="360"
+                            style={{ border: 0, display: "block" }}
+                            allowFullScreen
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="Ubicación "
+                        />
+                    </div>
+                    <div>
+                        <div
+                            style={{
+                                fontSize: 13,
+                                fontWeight: 700,
+                                color: C.navy,
+                                letterSpacing: ".06em",
+                                textTransform: "uppercase",
+                                marginBottom: 16,
+                                textAlign: "center",
+                            }}
+                        >
+                            Distancias aproximadas
+                        </div>
+                        <div
+                            style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 10,
+                            }}
+                        >
+                            {DISTANCIAS.map((d) => (
+                                <div
+                                    key={d.lugar}
+                                    style={{
+                                        background: C.off,
+                                        border: `1px solid ${C.border}`,
+                                        borderRadius: 12,
+                                        padding: "14px 18px",
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        transition: "border-color .15s",
+                                    }}
+                                    onMouseEnter={(e) =>
+                                        (e.currentTarget.style.borderColor =
+                                            C.gold)
+                                    }
+                                    onMouseLeave={(e) =>
+                                        (e.currentTarget.style.borderColor =
+                                            C.border)
+                                    }
+                                >
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            gap: 10,
+                                        }}
+                                    >
+                                        <span style={{ fontSize: 20 }}>
+                                            {d.icon}
+                                        </span>
+                                        <span
+                                            style={{
+                                                fontSize: 14,
+                                                fontWeight: 600,
+                                                color: C.text,
+                                            }}
+                                        >
+                                            {d.lugar}
+                                        </span>
+                                    </div>
+                                    <span
+                                        style={{
+                                            fontSize: 14,
+                                            fontWeight: 800,
+                                            color: C.navy,
+                                        }}
+                                    >
+                                        {d.dist}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                        <div style={{ marginTop: 20, textAlign: "center" }}>
+                            <BtnGold href={WA_LINK_CITA}>
+                                Agendar visita guiada
+                            </BtnGold>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    )
+}
+// ─── TERRENOS ────────────────────────────────────────────────────────────────
+const TERRENOS = [
+    {
+        id: 1,
+        nombre: "Terreno en Ocoyoacac",
+        lat: 19.276277,   // 👈 agrega esto
+        lng: -99.466222,  // 👈 agrega esto
+        metrosCuadrados: 798,
+        precioPorMetro: 3750,
+        precioTotal: 2992500,
+        etiquetas: ["📍 Ocoyoacac, Edo. Mex.","🎯 Precio a tratar"],
+        destacado: true,
+        imagen: IMG.terreno1,  // 👈 Usando IMG en lugar de URL directa
+        descripcion: "Listo para construir, completamente bardeado, limpio y con todos los servicios",
+    },
+    {
+        id: 2,
+        nombre: "Terreno en Capulhuac",
+        lat: 19.217972,   // 👈 agrega esto
+        lng: -99.462583,  // 👈 agrega esto
+        metrosCuadrados: 477,
+        precioPorMetro: 1700,
+        precioTotal: 810900,
+        etiquetas: ["📍 Capulhuac,Edo. Mex. "],
+        destacado: false,
+        imagen: IMG.terreno2,
+        descripcion: "Excelente ubicación, fácil acceso y entorno tranquilo",
+    },
+    {
+        id: 3,
+        nombre: "Terreno en Xometitla",
+        lat: 19.193361,   // 👈 agrega esto
+        lng: -99.477110,  // 👈 agrega esto
+        metrosCuadrados: 6900,
+        precioPorMetro: 1850,
+        precioTotal: 12765000,
+        etiquetas: ["📍 Xometitla, Capulhuac, Edo. Mex."],
+        destacado: false,
+        imagen: IMG.terreno3,
+        descripcion: "Excelente ubicación, fácil acceso y gran potencial de inversión",
+    },
+    {
+        id: 4,
+        nombre: "Terreno en Ocoyoacac",
+        lat: 19.240722,   // 👈 agrega esto
+        lng: -99.462667,  // 👈 agrega esto
+        metrosCuadrados: 642.5,
+        precioPorMetro: 980,
+        precioTotal: 1710000,
+        etiquetas: ["📍 San Miguel Almaya, Capulhuac, Edo. Mex."],
+        destacado: true,
+        imagen: IMG.terreno4,
+        descripcion: "Frente al campo de golf, terreno de lujo con amenidades cercanas.",
+    },
+]
+
+function Terrenos() {
+    const [selectedImage, setSelectedImage] = useState(null)
+    
+    const formatNumber = (num) => {
+        return new Intl.NumberFormat('es-MX').format(num)
     }
+
+    return (
+        <section
+            id="terrenos"
+            style={{
+                background: `linear-gradient(135deg, ${C.sunsetL} 0%, ${C.white} 100%)`,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+                borderTop: `1px solid ${C.border}`,
+                borderBottom: `1px solid ${C.border}`,
+            }}
+        >
+            <div style={{ maxWidth: 1440, margin: "0 auto" }}>
+                <SectionTitle
+                    badge="TERRENOS DISPONIBLES"
+                    badgeBg={C.sunsetL}
+                    badgeColor={C.sunset}
+                    title="Invierte en tu terreno"
+                    sub="Precios por metro cuadrado desde $980 MXN. Terrenos con gran plusvalía"
+                    center
+                />
+
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+                        gap: 28,
+                        marginTop: 24,
+                    }}
+                >
+                    {TERRENOS.map((terreno) => (
+                        <div
+                            key={terreno.id}
+                            style={{
+                                background: C.white,
+                                borderRadius: 20,
+                                overflow: "hidden",
+                                transition: "all 0.3s ease",
+                                boxShadow: terreno.destacado 
+                                    ? `0 12px 30px rgba(232,147,79,.15), 0 0 0 2px ${C.sunset}` 
+                                    : "0 8px 20px rgba(0,0,0,0.06)",
+                                cursor: "pointer",
+                            }}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "transeY(-8px)"
+                                e.currentTarget.style.boxShadow = "0 20px 40px rgba(0,0,0,0.12)"
+                            }}
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "none"
+                                e.currentTarget.style.boxShadow = terreno.destacado 
+                                    ? `0 12px 30px rgba(232,147,79,.15), 0 0 0 2px ${C.sunset}` 
+                                    : "0 8px 20px rgba(0,0,0,0.06)"
+                            }}
+                            onClick={() => setSelectedImage(terreno)}
+                        >
+                            <div
+                                style={{
+                                    width: "100%",
+                                    aspectRatio: "4/3",
+                                    background: `linear-gradient(135deg, ${C.sunsetL} 0%, ${C.off} 100%)`,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    padding: 16,
+                                    position: "relative",
+                                }}
+                            >
+                                <img
+                                    src={terreno.imagen}
+                                    alt={terreno.nombre}
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        objectFit: "contain",
+                                    }}
+                                />
+                                {terreno.destacado && (
+                                    <div
+                                        style={{
+                                            position: "absolute",
+                                            top: 12,
+                                            left: 12,
+                                            background: C.gold,
+                                            color: "#fff",
+                                            fontSize: 11,
+                                            fontWeight: 700,
+                                            padding: "4px 12px",
+                                            borderRadius: 20,
+                                        }}
+                                    >
+                                        ⭐ DESTACADO
+                                    </div>
+                                )}
+                            </div>
+
+                            <div style={{ padding: "24px" }}>
+                                <h3
+                                    style={{
+                                        fontSize: 20,
+                                        fontWeight: 800,
+                                        color: C.navy,
+                                        marginBottom: 8,
+                                    }}
+                                >
+                                    {terreno.nombre}
+                                </h3>
+
+                                <p
+                                    style={{
+                                        fontSize: 13,
+                                        color: C.muted,
+                                        marginBottom: 16,
+                                        lineHeight: 1.5,
+                                    }}
+                                >
+                                    {terreno.descripcion}
+                                </p>
+
+                                <div style={{ marginBottom: 20, display: "flex", flexWrap: "wrap", gap: 6 }}>
+                                    {terreno.etiquetas.map((tag, idx) => (
+                                        <span
+                                            key={idx}
+                                            style={{
+                                                display: "inline-block",
+                                                background: C.sunsetL,
+                                                color: C.terracota,
+                                                fontSize: 11,
+                                                fontWeight: 700,
+                                                padding: "4px 10px",
+                                                borderRadius: 20,
+                                            }}
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+
+                                <div
+                                    style={{
+                                        background: C.off,
+                                        borderRadius: 12,
+                                        padding: "16px",
+                                        marginBottom: 20,
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                            marginBottom: 12,
+                                            paddingBottom: 12,
+                                            borderBottom: `1px solid ${C.border}`,
+                                        }}
+                                    >
+                                        <span style={{ color: C.muted, fontSize: 13 }}>📐 Metros totales</span>
+                                        <span style={{ fontWeight: 800, color: C.text, fontSize: 18 }}>
+                                            {terreno.metrosCuadrados} m²
+                                        </span>
+                                    </div>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            justifyContent: "space-between",
+                                        }}
+                                    >
+                                        <span style={{ color: C.muted, fontSize: 13 }}>💰 Precio por m²</span>
+                                        <span style={{ fontWeight: 700, color: C.sunset, fontSize: 16 }}>
+                                            ${formatNumber(terreno.precioPorMetro)} MXN
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <BtnGold
+                                    href={WA_LINK_TERRENO}
+                                    full
+                                    style={{ 
+                                        justifyContent: "center", 
+                                        gap: 6,
+                                        background: C.sunset,
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    📞 Me interesa este terreno
+                                </BtnGold>
+                                <BtnOutline
+                                    href={`https://www.google.com/maps?q=${terreno.lat},${terreno.lng}`}
+                                    full
+                                    style={{ 
+                                        justifyContent: "center", 
+                                        gap: 6, 
+                                        marginTop: 10,
+                                        borderColor: C.sunset,
+                                        color: C.sunset,
+                                    }}
+                                    onClick={(e) => e.stopPropagation()}
+                                >
+                                    🗺️ Ver ubicación en Google Maps
+                                </BtnOutline>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {selectedImage && (
+                    <div
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: "rgba(0,0,0,0.95)",
+                            zIndex: 1000,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            cursor: "pointer",
+                            backdropFilter: "blur(8px)",
+                        }}
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        <div style={{ maxWidth: "90vw", maxHeight: "90vh", position: "relative" }}>
+                            <img
+                                src={selectedImage.imagen}
+                                alt={selectedImage.nombre}
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "contain",
+                                    borderRadius: 12,
+                                }}
+                            />
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    bottom: -40,
+                                    left: 0,
+                                    right: 0,
+                                    textAlign: "center",
+                                    color: "#fff",
+                                    fontSize: 14,
+                                }}
+                            >
+                                <strong>{selectedImage.nombre}</strong> - {selectedImage.descripcion}
+                            </div>
+                            <button
+                                style={{
+                                    position: "absolute",
+                                    top: -40,
+                                    right: 0,
+                                    background: "none",
+                                    border: "none",
+                                    color: "#fff",
+                                    fontSize: 28,
+                                    cursor: "pointer",
+                                    padding: "8px 16px",
+                                }}
+                                onClick={() => setSelectedImage(null)}
+                            >
+                                ✕ Cerrar
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                <div
+                    style={{
+                        marginTop: 48,
+                        background: `linear-gradient(135deg, ${C.terracota}20 0%, ${C.sunset}20 100%)`,
+                        borderRadius: 16,
+                        padding: "24px",
+                        textAlign: "center",
+                        border: `1px solid ${C.sunset}`,
+                    }}
+                >
+                    <p style={{ fontSize: 14, color: C.text, marginBottom: 16 }}>
+                        🌟 ¿Buscas un terreno con medidas diferentes? Contáctanos y te ayudamos a encontrar
+                        lo que necesitas.
+                    </p>
+                    <BtnGold href={WA_LINK_GENERAL} style={{ padding: "10px 24px", fontSize: 13 }}>
+                        Consultar más opciones
+                    </BtnGold>
+                </div>
+            </div>
+        </section>
+    )
+}
+// ─── CONTACTO ──────────────────────────────────────────────────────────────
+function Contacto() {
+    return (
+        <section
+            id="contacto"
+            style={{
+                background: C.navyD,
+                padding: "clamp(40px, 10vw, 88px) 5%",
+            }}
+        >
+            <div style={{ maxWidth: 680, margin: "0 auto", padding: "0 5%" }}>
+                <SectionTitle
+                    light
+                    center
+                    badge="CONTACTO"
+                    title="¿Te interesa alguna propiedad?"
+                    sub="Déjanos tus datos o escríbenos por WhatsApp. Te respondemos en menos de 24 horas."
+                />
+                <div style={{ textAlign: "center" }}>
+                    <a
+                        href={`tel:+${WA_NUM}`}
+                        style={{
+                            display: "inline-block",
+                            fontSize: "clamp(22px, 5vw, 28px)",
+                            fontWeight: 800,
+                            color: "#fff",
+                            textDecoration: "none",
+                            marginBottom: 20,
+                        }}
+                    >
+                        📞 722 404 7668
+                    </a>
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: 16,
+                            justifyContent: "center",
+                            marginBottom: 28,
+                        }}
+                    >
+                        {/* 👇 Reemplaza estos # por tus links reales de Instagram / Facebook */}
+                        <a
+                            href="#"
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                fontSize: 22,
+                                textDecoration: "none",
+                                color: "#fff",
+                                background: "rgba(255,255,255,.08)",
+                                border: "1px solid rgba(255,255,255,.15)",
+                                borderRadius: "50%",
+                                width: 44,
+                                height: 44,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            📸
+                        </a>
+                        <a
+                            href="#"
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                fontSize: 22,
+                                textDecoration: "none",
+                                color: "#fff",
+                                background: "rgba(255,255,255,.08)",
+                                border: "1px solid rgba(255,255,255,.15)",
+                                borderRadius: "50%",
+                                width: 44,
+                                height: 44,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            📘
+                        </a>
+                    </div>
+                    <BtnOutline href={WA_LINK_CITA} light>
+                        Escribir por WhatsApp
+                    </BtnOutline>
+                </div>
+            </div>
+        </section>
+    )
 }
 
-// ========== CALCULAR TOTAL ==========
-function calcularTotal() {
-    const pk = document.querySelector('input[name="paquete"]:checked')?.value || 'plata';
-    const mk = document.querySelector('input[name="menu"]:checked')?.value || 'ninguno';
-    let personas = parseInt(document.getElementById('personas')?.value || 100);
-    if (isNaN(personas)) personas = 100;
-    if (personas < 20) personas = 20;
-    if (personas > 200) personas = 200;
-    document.getElementById('personas').value = personas;
-    const total = (paquetes[pk]?.precio || 0) * personas + (menus[mk]?.precio || 0) * personas;
-    document.getElementById('totalMonto').innerText = '$' + total.toLocaleString('es-MX') + ' MXN';
-    return total;
+// ─── AVISO DE PRIVACIDAD ───────────────────────────────────────────────────
+function AvisoPrivacidad() {
+    return (
+        <section
+            id="aviso-privacidad"
+            style={{
+                background: C.navyL,
+                padding: "clamp(40px, 8vw, 60px) 5%",
+                borderTop: `1px solid ${C.border}`,
+            }}
+        >
+            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+                <h3
+                    style={{
+                        fontSize: "clamp(22px, 5vw, 28px)",
+                        fontWeight: 800,
+                        color: C.navy,
+                        marginBottom: 24,
+                        textAlign: "center",
+                    }}
+                >
+                    Aviso de Privacidad Integral
+                </h3>
+                <p
+                    style={{
+                        fontSize: 13,
+                        color: C.muted,
+                        textAlign: "center",
+                        marginBottom: 32,
+                    }}
+                >
+                    Fecha de última actualización: Abril 2026
+                </p>
+                <div
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit, minmax(280px, 1fr))",
+                        gap: 28,
+                    }}
+                >
+                    {[
+                        {
+                            num: "1",
+                            title: "Introducción",
+                            content: (
+                                <>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        <strong>Casas</strong> (en adelante "el
+                                        desarrollador"), con domicilio en
+                                        Xometitla, Capulhuac, Estado de México,
+                                        es responsable del tratamiento de sus
+                                        datos personales. Este Aviso de
+                                        Privacidad establece los términos en que
+                                        recopilamos, usamos, almacenamos y
+                                        protegemos la información que nos
+                                        proporciona.
+                                    </p>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                        }}
+                                    >
+                                        Al proporcionarnos sus datos personales,
+                                        usted acepta los términos descritos.
+                                        Cumplimos con la{" "}
+                                        <strong>
+                                            Ley Federal de Protección de Datos
+                                            Personales en Posesión de los
+                                            Particulares (LFPDPPP)
+                                        </strong>{" "}
+                                        en México.
+                                    </p>
+                                </>
+                            ),
+                        },
+                        {
+                            num: "2",
+                            title: "Información que recopilamos",
+                            content: (
+                                <>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        Podemos recopilar las siguientes
+                                        categorías:
+                                    </p>
+                                    <ul
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginLeft: 20,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        <li>
+                                            <strong>Identificación:</strong>{" "}
+                                            nombre completo, correo electrónico,
+                                            número telefónico.
+                                        </li>
+                                        <li>
+                                            <strong>Contacto:</strong> dirección
+                                            (opcional), ciudad de residencia.
+                                        </li>
+                                        <li>
+                                            <strong>Preferencias:</strong> tipo
+                                            de propiedad, rango de presupuesto.
+                                        </li>
+                                        <li>
+                                            <strong>Interacción:</strong>{" "}
+                                            navegación en el sitio (cookies).
+                                        </li>
+                                    </ul>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                        }}
+                                    >
+                                        <strong>
+                                            No recopilamos información sensible
+                                        </strong>{" "}
+                                        como datos financieros, salud o
+                                        afiliación política.
+                                    </p>
+                                </>
+                            ),
+                        },
+                        {
+                            num: "3",
+                            title: "Uso de la información",
+                            content: (
+                                <>
+                                    <ul
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginLeft: 20,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        <li>
+                                            Proporcionar información sobre
+                                            propiedades en venta y renta.
+                                        </li>
+                                        <li>
+                                            Atender solicitudes de cotización y
+                                            visitas guiadas.
+                                        </li>
+                                        <li>
+                                            Contactar vía WhatsApp, correo o
+                                            teléfono.
+                                        </li>
+                                        <li>
+                                            Enviar comunicaciones sobre
+                                            promociones (solo con
+                                            consentimiento).
+                                        </li>
+                                        <li>
+                                            Mejorar el sitio web y servicios.
+                                        </li>
+                                    </ul>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                        }}
+                                    >
+                                        <strong>
+                                            No utilizamos sus datos para fines
+                                            distintos
+                                        </strong>{" "}
+                                        sin consentimiento previo.
+                                    </p>
+                                </>
+                            ),
+                        },
+                        {
+                            num: "4",
+                            title: "Compartir información",
+                            content: (
+                                <>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        Casas{" "}
+                                        <strong>
+                                            no vende, alquila ni comparte sus
+                                            datos con terceros no relacionados
+                                        </strong>{" "}
+                                        a la operación del desarrollo.
+                                    </p>
+                                    <ul
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginLeft: 20,
+                                        }}
+                                    >
+                                        <li>
+                                            Con proveedores tecnológicos (como
+                                            Tally) sujetos a confidencialidad.
+                                        </li>
+                                        <li>
+                                            Cuando sea requerido por autoridad
+                                            competente.
+                                        </li>
+                                        <li>Con su consentimiento expreso.</li>
+                                    </ul>
+                                </>
+                            ),
+                        },
+                        {
+                            num: "5",
+                            title: "Cookies",
+                            content: (
+                                <>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        Usamos cookies para mejorar la
+                                        navegación, analizar tráfico y medir
+                                        campañas. Puede deshabilitar las cookies
+                                        en su navegador.
+                                    </p>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.muted,
+                                            fontStyle: "italic",
+                                        }}
+                                    >
+                                        ⚠️ No utilizamos cookies para recopilar
+                                        información personal sensible.
+                                    </p>
+                                </>
+                            ),
+                        },
+                        {
+                            num: "6",
+                            title: "Derechos ARCO",
+                            content: (
+                                <>
+                                    <ul
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.text,
+                                            lineHeight: 1.5,
+                                            marginLeft: 20,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        <li>
+                                            <strong>Acceso:</strong> Conocer qué
+                                            datos tenemos de usted.
+                                        </li>
+                                        <li>
+                                            <strong>Rectificación:</strong>{" "}
+                                            Corregir datos inexactos.
+                                        </li>
+                                        <li>
+                                            <strong>Cancelación:</strong>{" "}
+                                            Eliminar sus datos.
+                                        </li>
+                                        <li>
+                                            <strong>Oposición:</strong> Oponerse
+                                            al uso para fines específicos.
+                                        </li>
+                                    </ul>
+                                    <p
+                                        style={{
+                                            fontSize: 14,
+                                            color: C.navy,
+                                            fontWeight: 600,
+                                            marginBottom: 8,
+                                        }}
+                                    >
+                                        📧{" "}
+                                        <a
+                                            href="mailto:contacto.inmobiliaria@gmail.com"
+                                            style={{ color: C.gold }}
+                                        >
+                                            contacto.inmobiliaria@gmail.com
+                                        </a>
+                                    </p>
+                                </>
+                            ),
+                        },
+                    ].map(({ num, title, content }) => (
+                        <div key={num}>
+                            <h4
+                                style={{
+                                    fontSize: 18,
+                                    fontWeight: 700,
+                                    color: C.gold,
+                                    marginBottom: 12,
+                                }}
+                            >
+                                {num}. {title}
+                            </h4>
+                            {content}
+                        </div>
+                    ))}
+                </div>
+                <div
+                    style={{
+                        marginTop: 40,
+                        paddingTop: 24,
+                        borderTop: `1px solid ${C.border}`,
+                        textAlign: "center",
+                    }}
+                >
+                    <p style={{ fontSize: 13, color: C.muted }}>
+                        ✅ <strong>Consentimiento:</strong> Al enviar el
+                        formulario o comunicarse por WhatsApp, usted otorga su
+                        consentimiento para el tratamiento de sus datos conforme
+                        a este Aviso de Privacidad.
+                    </p>
+                </div>
+            </div>
+        </section>
+    )
 }
 
-// ========== ENVIAR POR WHATSAPP ==========
-function enviarCotizacion() {
-    const pk = document.querySelector('input[name="paquete"]:checked')?.value || 'plata';
-    const mk = document.querySelector('input[name="menu"]:checked')?.value || 'ninguno';
-    const personas = document.getElementById('personas')?.value || 100;
-    const total = calcularTotal();
-    const msg = `¡Hola! Me interesa cotizar mi evento en El Fox Manor.%0A%0A` +
-        `📦 *Paquete:* ${paquetes[pk].nombre}%0A` +
-        `👥 *Invitados:* ${personas} personas%0A` +
-        `🍽️ *Menú:* ${menus[mk].nombre}%0A` +
-        `💰 *Total estimado:* $${total.toLocaleString('es-MX')} MXN + IVA%0A%0A` +
-        `¿Podrían confirmarme disponibilidad? Gracias.`;
-    window.open(`https://wa.me/521234567890?text=${msg}`, '_blank');
+// ─── FOOTER ────────────────────────────────────────────────────────────────
+function Footer() {
+    return (
+        <footer
+            style={{
+                background: C.dark,
+                padding: "clamp(24px, 5vw, 36px) 5%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 16,
+            }}
+        >
+            <div style={{ textAlign: "center" }}>
+                <div
+                    style={{
+                        color: "#fff",
+                        fontSize: "clamp(12px, 4vw, 15px)",
+                        fontWeight: 800,
+                        letterSpacing: ".05em",
+                        marginBottom: 4,
+                    }}
+                >
+                    CASAS ANDARES
+                </div>
+                <div
+                    style={{
+                        color: "rgba(255,255,255,.35)",
+                        fontSize: "clamp(10px, 3vw, 12px)",
+                    }}
+                >
+                    Calle sin Nombre S/N, Xometitla, Capulhuac de Mirafuentes, Mexico, 52700 · © 2026
+                </div>
+            </div>
+            <div
+                style={{
+                    display: "flex",
+                    gap: "clamp(16px, 4vw, 24px)",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                    justifyContent: "center",
+                }}
+            >
+                {[
+                    ["inicio", "Inicio"],
+                    ["casas", "Casas"],
+                    ["amenidades", "Amenidades"],
+                    ["croquis", "Croquis"],
+                    ["ubicacion", "Ubicación"],
+                    ["contacto", "Contacto"],
+                    ["aviso-privacidad", "Aviso de Privacidad"],
+                ].map(([id, l]) => (
+                    <button
+                        key={id}
+                        onClick={() => scroll(id)}
+                        style={{
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            color: "rgba(255,255,255,.4)",
+                            fontSize: "clamp(11px, 3vw, 13px)",
+                            fontFamily: "inherit",
+                            transition: "color .15s",
+                        }}
+                        onMouseEnter={(e) =>
+                            (e.currentTarget.style.color = "#fff")
+                        }
+                        onMouseLeave={(e) =>
+                            (e.currentTarget.style.color =
+                                "rgba(255,255,255,.4)")
+                        }
+                    >
+                        {l}
+                    </button>
+                ))}
+                <a
+                    href={WA_LINK_GENERAL}
+                    target="_blank"
+                    rel="noreferrer"
+                    style={{
+                        color: C.gold,
+                        fontSize: "clamp(11px, 3vw, 13px)",
+                        fontWeight: 700,
+                        textDecoration: "none",
+                    }}
+                >
+                    WhatsApp
+                </a>
+            </div>
+        </footer>
+    )
 }
 
-// ========== GALERÍA ==========
-function cargarGaleria() {
-    const grid = document.getElementById('galleryGrid');
-    const imgs = [
-        'https://i.postimg.cc/6pc4SqVB/EVENTO1.jpg',
-        'https://i.postimg.cc/8z4f3cdp/EVENTO2.jpg',
-        'https://i.postimg.cc/L8Dg75k4/EVENTO3.jpg',
-        'https://i.postimg.cc/P5yvcJbr/EVENTO4.jpg'
-    ];
-    grid.innerHTML = '';
-    imgs.forEach((src, i) => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        item.setAttribute('data-aos','zoom-in');
-        item.setAttribute('data-aos-delay',(i*100).toString());
-        item.innerHTML = `<img src="${src}" alt="Galería El Fox Manor ${i+1}" loading="lazy">`;
-        item.addEventListener('click', () => {
-            document.getElementById('modalGaleria').style.display = 'flex';
-            document.getElementById('modalImg').src = src;
-        });
-        grid.appendChild(item);
-    });
+// ─── APP PRINCIPAL ─────────────────────────────────────────────────────────
+export default function PrivadaAndares() {
+    return (
+        <div
+            style={{
+                fontFamily: "'Montserrat','Segoe UI',sans-serif",
+                color: C.text,
+                background: C.white,
+            }}
+        >
+            <style>{`... tus estilos ...`}</style>
+            <Navbar />
+            <Hero />
+            {/* <BannerBono /> */}
+            <Descripcion />
+
+            {/* SECCIÓN 1: SOLO VENTA/RENTA */}
+            <Casas />
+
+            {/* SECCIÓN 2: DISTRIBUCIÓN COMPLETA (texto + imágenes grandes) */}
+            <DistribucionGaleria />
+
+            {/* SECCIÓN 3: GALERÍA DE ESPACIOS (NUEVA) */}
+            <GaleriaEspacios />
+
+            <Amenidades />
+            <Croquis />
+            <Ubicacion />
+            <Terrenos />
+            <Contacto />
+            <AvisoPrivacidad />
+            <Footer />
+        </div>
+    )
 }
-
-// ========== TESTIMONIOS ==========
-function cargarTestimonios() {
-    const c = document.getElementById('testimoniosGrid');
-    const ts = [
-        { nombre:"María L.", evento:"Boda", texto:"El lugar es hermoso y completamente privado. No tuvimos que compartir el estacionamiento con nadie más. Todo estuvo perfecto y la atención fue increíble.", estrellas:5, icono:"👰" },
-        { nombre:"Carlos R.", evento:"XV Años", texto:"La sala de anfitriones fue un salvavidas. Pudimos descansar antes del evento. El salón es nuevo y todo está en excelentes condiciones.", estrellas:5, icono:"💎" },
-        { nombre:"Ana G.", evento:"Evento Corporativo", texto:"El estacionamiento amplio y la seguridad nos dieron mucha tranquilidad. El audio y las pantallas funcionaron perfecto para nuestra presentación.", estrellas:5, icono:"🏆" }
-    ];
-    c.innerHTML = '';
-    ts.forEach((t, i) => {
-        const card = document.createElement('div');
-        card.className = 'testimonial-card';
-        card.setAttribute('data-aos','fade-up');
-        card.setAttribute('data-aos-delay',(i*150).toString());
-        card.innerHTML = `
-            <div class="stars">${'★'.repeat(t.estrellas)}</div>
-            <p style="font-style:italic;margin:20px 0;line-height:1.7;">"${t.texto}"</p>
-            <div style="display:flex;align-items:center;gap:16px;margin-top:24px;">
-                <div style="font-size:42px;">${t.icono}</div>
-                <div><strong style="font-size:17px;color:var(--delft-blue);">${t.nombre}</strong><br><span style="color:var(--text-light);font-size:14px;">${t.evento}</span></div>
-            </div>`;
-        c.appendChild(card);
-    });
-}
-
-// ========== FAQ ==========
-function cargarFAQ() {
-    const c = document.getElementById('faqGrid');
-    const faqs = [
-        { p:"¿El salón es completamente privado?", r:"Sí, el salón se renta únicamente a ti. No compartimos el espacio con otros eventos. Todo el lugar, incluyendo estacionamiento, es exclusivamente para tu celebración." },
-        { p:"¿Cuántas horas incluye la renta?", r:"Todos nuestros paquetes incluyen 12 horas de renta. Puedes contratar horas extras con costo adicional según disponibilidad." },
-        { p:"¿Qué incluye la sala de anfitriones?", r:"La sala incluye comedor, tarja, refrigerador y es un espacio privado donde los anfitriones pueden descansar, cambiarse o tener privacidad. Disponible en paquetes Centenario y Diamante." },
-        { p:"¿El menú se prepara en el lugar?", r:"Sí, contamos con cocina industrial equipada para preparar todos los alimentos al momento. Garantizamos platillos frescos y calientes para tus invitados." },
-        { p:"¿Puedo traer mi propio decorador?", r:"Sí, puedes traer tu propio decorador sin costo adicional. Solo necesitamos que nos avises con anticipación para coordinar." },
-        { p:"¿Cómo puedo agendar una visita?", r:"Las visitas se realizan de 10:00 AM a 2:00 PM. Puedes contactarnos por WhatsApp o usar el botón de la sección de disponibilidad para solicitar tu cita." }
-    ];
-    c.innerHTML = '';
-    faqs.forEach((f, i) => {
-        const item = document.createElement('div');
-        item.className = 'faq-item';
-        item.setAttribute('data-aos','fade-up');
-        item.setAttribute('data-aos-delay',(i*100).toString());
-        item.innerHTML = `<div class="faq-question">${f.p}<span>▼</span></div><div class="faq-answer">${f.r}</div>`;
-        item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
-        c.appendChild(item);
-    });
-}
-
-// ========== INIT ==========
-document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({ duration:800, easing:'ease-out-cubic', once:true, offset:50 });
-
-    renderPaquetes();
-    renderMenu();
-    calcularTotal();
-    cargarGaleria();
-    cargarTestimonios();
-    cargarFAQ();
-
-    // Navbar scroll
-    const navbar = document.getElementById('navbar');
-    const toggle = document.getElementById('menuToggle');
-    const links  = document.getElementById('navLinks');
-    toggle.addEventListener('click', () => links.classList.toggle('active'));
-    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('active')));
-    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', e => {
-            const t = document.querySelector(a.getAttribute('href'));
-            if (t) { e.preventDefault(); window.scrollTo({ top: t.offsetTop - 80, behavior:'smooth' }); }
-        });
-    });
-
-    // Botones
-    document.getElementById('cotizarWhatsAppBtn').addEventListener('click', enviarCotizacion);
-    document.getElementById('consultarFechaBtn').addEventListener('click', () =>
-        window.open('https://wa.me/521234567890?text=' + encodeURIComponent('Hola, me interesa El Fox Manor. ¿Podrían confirmarme disponibilidad para una fecha? Gracias.'), '_blank'));
-    document.getElementById('agendarVisitaBtn').addEventListener('click', () =>
-        window.open('https://wa.me/521234567890?text=' + encodeURIComponent('Hola, me gustaría agendar una visita a El Fox Manor. Prefiero horarios de 10:00 AM a 2:00 PM. ¿Tienen disponibilidad? Gracias.'), '_blank'));
-
-    // Modal galería
-    document.getElementById('modalGaleria').addEventListener('click', () =>
-        document.getElementById('modalGaleria').style.display = 'none');
-
-    // Modal privacidad
-    document.getElementById('avisoPrivacidadLink').addEventListener('click', e => {
-        e.preventDefault();
-        document.getElementById('privacidadModal').style.display = 'flex';
-    });
-    document.getElementById('privacidadModal').addEventListener('click', e => {
-        if (e.target === document.getElementById('privacidadModal')) document.getElementById('privacidadModal').style.display = 'none';
-    });
-
-    // Input personas
-    document.getElementById('personas').addEventListener('input', calcularTotal);
-});
-</script>
-</body>
-</html>
